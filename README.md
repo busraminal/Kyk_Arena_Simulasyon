@@ -9,12 +9,15 @@ Arena simülasyon çıktıları, istatistiksel uygunluk testleri ve darboğaz te
 ## İçindekiler
 
 - [Proje Özeti](#proje-özeti)
+- [Görsel Özet](#görsel-özet)
 - [Temel Özellikler](#temel-özellikler)
 - [Problem ve İş Kapsamı](#problem-ve-iş-kapsamı)
 - [Sistem Mimarisi](#sistem-mimarisi)
 - [Analiz Akışı](#analiz-akışı)
 - [Arena Modül Haritası](#arena-modül-haritası)
 - [İstatistiksel Testler](#istatistiksel-testler)
+- [İstatistiksel Görseller](#istatistiksel-görseller)
+- [Sonuçlar ve İyileşme](#sonuçlar-ve-iyileşme)
 - [Darboğaz Tespit Kuralları](#darboğaz-tespit-kuralları)
 - [Kurulum](#kurulum)
 - [Hızlı Başlangıç](#hızlı-başlangıç)
@@ -36,6 +39,28 @@ Bu proje, KYK yemekhane senaryosunda **yüksek talep / sınırlı kapasite** kay
 - Kuyruk birikimi süre bazlı mı, kapasite bazlı mı?
 - Dağılım varsayımları (üstel/normal) veriye uyuyor mu?
 - Hangi operasyonel aksiyon en hızlı iyileştirmeyi sağlar?
+
+---
+
+## Görsel Özet
+
+### Model ve Süreç Diyagramları
+
+KYK akışını hızlıca anlamak için:
+
+![KYK model genel görünüm](web/assets/kyk-model-display.png)
+
+![KYK model kaynak diyagramı](web/assets/kyk-model-source.png)
+
+![KYK model akış detayı](web/assets/kyk-model-akisi.png)
+
+### Pipeline ve Analiz Akışı
+
+![KYK analiz pipeline](web/assets/kyk-pipeline-display.png)
+
+![KYK karar ve raporlama diyagramı](web/assets/kyk-diagram-ana.png)
+
+![KYK mini pipeline görünümü](web/assets/kyk-diagram-pipeline.png)
 
 ---
 
@@ -108,6 +133,18 @@ Darboğaz kural motoru
 Web panelde raporlama
 ```
 
+### Mantıklı Akış (adım adım)
+
+```mermaid
+flowchart TD
+    A[Veri Girdisi<br/>Arena .out / Excel / JSON] --> B[Ön İşleme<br/>Parser + Temizlik]
+    B --> C[İstatistik Katmanı<br/>Ki-kare + KS]
+    C --> D[Performans Katmanı<br/>WIP / Throughput / Kuyruk]
+    D --> E[Darboğaz Motoru<br/>Kural tabanlı tespit]
+    E --> F[Öneri Üretimi<br/>Kapasite + Personel + Senkronizasyon]
+    F --> G[Web Raporu<br/>Karar destek paneli]
+```
+
 Uygulamada desteklenen çalışma modları:
 
 - **Tam Rapor**: Excel + metrik + test + darboğaz
@@ -150,6 +187,65 @@ Sunum ve model uyumluluğu için modüller bu şekilde eşleştirilir:
   - `Yemek_Yeme_Dk ~ Normal`
 
 > Not: Parametreler veriden tahmin edildiğinde klasik KS p-değer yorumunda dikkat gerekir.
+
+---
+
+## İstatistiksel Görseller
+
+Bu bölüm, sunumda kullandığın test akışını GitHub üzerinde görsel olarak da takip edebilmek için eklendi.
+
+### 1) Geliş süresi ham dağılım görünümü
+
+Geliş sürelerinin yayılımını ve yoğunluk bölgelerini gösterir.
+
+![Geliş süresi heatmap](docs/images/01-gelis-suresi-heatmap.png)
+
+### 2) Ki-kare uygunluk testi (karar şeması)
+
+Hesaplanan istatistik ile kritik sınırın karşılaştırmasını görselleştirir.
+
+![Ki-kare karar şeması](docs/images/02-kikare-karar-semasi.png)
+
+### 3) Ki-kare tablo + formül adımları
+
+Aralık, gözlenen/beklenen frekans ve test istatistiği hesabını özetler.
+
+![Ki-kare tablo ve formül](docs/images/03-kikare-tablo-formul.png)
+
+### 4) K-S testi hazırlık (sıralı görünüm)
+
+Hız çarpanı verisinin küçükten büyüğe sıralanmış test hazırlık adımı.
+
+![K-S hazırlık görünümü](docs/images/04-ks-hiz-carpani-sira.png)
+
+### 5) K-S tablo hesabı (F0, Fz, farklar)
+
+Maksimum sapma değerine giden hesaplama adımlarını gösterir.
+
+![K-S Z tablo](docs/images/05-ks-z-tablo.png)
+
+### 6) K-S karar şeması
+
+Bulunan `Dmax` ile kritik sınır karşılaştırmasını verir.
+
+![K-S karar şeması](docs/images/06-ks-karar-semasi.png)
+
+---
+
+## Sonuçlar ve İyileşme
+
+Bu görsel, model düzeltmesi öncesi ve sonrası kuyruk davranışını karşılaştırır.
+
+![Önce ve sonra darboğaz karşılaştırması](docs/images/07-oncesi-sonrasi-iyilestirme.png)
+
+Çıkarım:
+
+- Et hattı kuyruğu yaklaşık `8.79` kişiden `0.01` kişiye düştü.
+- Sebze hattı kuyruğu yaklaşık `2.91` kişiden `0.00` seviyesine indi.
+- Personel atama ve akış düzeltmesi alt akışı iyileştirdi.
+- Alt akış açılınca gerçek darboğazın oturma kapasitesi ve ekmek bekleme hattı olduğu daha net görünür oldu.
+
+Bu durum, simülasyonda klasik bir katmanlı iyileştirme etkisini gösterir: bir darboğaz çözüldüğünde bir sonraki darboğaz görünür hale gelir.
 
 ---
 
