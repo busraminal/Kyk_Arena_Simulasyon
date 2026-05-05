@@ -48,9 +48,9 @@ Bu proje, KYK yemekhane senaryosunda **yüksek talep / sınırlı kapasite** kay
 
 KYK akışını hızlıca anlamak için:
 
-![KYK model genel görünüm](web/assets/kyk-model-display.png)
 
-![KYK model kaynak diyagramı](web/assets/kyk-model-source.png)
+
+
 
 ![KYK model akış detayı](web/assets/kyk-model-akisi.png)
 
@@ -58,9 +58,7 @@ KYK akışını hızlıca anlamak için:
 
 ![KYK analiz pipeline](web/assets/kyk-pipeline-display.png)
 
-![KYK karar ve raporlama diyagramı](web/assets/kyk-diagram-ana.png)
 
-![KYK mini pipeline görünümü](web/assets/kyk-diagram-pipeline.png)
 
 ---
 
