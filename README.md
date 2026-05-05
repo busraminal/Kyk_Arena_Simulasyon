@@ -17,6 +17,7 @@ Arena simülasyon çıktıları, istatistiksel uygunluk testleri ve darboğaz te
 - [Arena Modül Haritası](#arena-modül-haritası)
 - [İstatistiksel Testler](#istatistiksel-testler)
 - [İstatistiksel Görseller](#istatistiksel-görseller)
+- [Web Arayüz Ekranları](#web-arayüz-ekranları)
 - [Sonuçlar ve İyileşme](#sonuçlar-ve-iyileşme)
 - [Darboğaz Tespit Kuralları](#darboğaz-tespit-kuralları)
 - [Kurulum](#kurulum)
@@ -227,6 +228,32 @@ Maksimum sapma değerine giden hesaplama adımlarını gösterir.
 Bulunan `Dmax` ile kritik sınır karşılaştırmasını verir.
 
 ![K-S karar şeması](docs/images/06-ks-karar-semasi.png)
+
+---
+
+## Web Arayüz Ekranları
+
+Bu bölümde platformun web tarafındaki gerçek ekran görüntüleri yer alır.
+
+### Ana ekran (hero ve hızlı özet)
+
+![Web ana ekran](docs/images/08-web-ana-ekran.png)
+
+### Kritik darboğaz tablosu ve açıklama paneli
+
+![Web kritik darboğazlar](docs/images/09-web-kritik-darbogazlar.png)
+
+### Ki-kare kartları
+
+![Web Ki-kare kartları](docs/images/10-web-kikare-kartlari.png)
+
+### Kolmogorov-Smirnov kartları
+
+![Web KS kartları](docs/images/11-web-ks-kartlari.png)
+
+### Raporu yenile paneli (Excel/JSON/.out)
+
+![Web raporu yenile paneli](docs/images/12-web-raporu-yenile.png)
 
 ---
 
