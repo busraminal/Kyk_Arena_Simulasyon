@@ -128,7 +128,7 @@ Darboğaz kural motoru
 Web panelde raporlama
 ```
 
-### Mantıklı Akış (adım adım)
+### Mantıklı Akış 
 
 ```mermaid
 flowchart TD
