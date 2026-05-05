@@ -50,9 +50,6 @@ Bu proje, KYK yemekhane senaryosunda **yüksek talep / sınırlı kapasite** kay
 KYK akışını hızlıca anlamak için:
 
 
-
-
-
 ![KYK model akış detayı](web/assets/kyk-model-akisi.png)
 
 ### Pipeline ve Analiz Akışı
@@ -82,7 +79,6 @@ Bu durum:
 - servis hızında düşüş,
 - personel yükünde dengesizlik,
 - öğrencilerin sistemde birikmesi
-
 sonuçlarını doğurur.
 
 Platform, bu problemi üç katmanda ele alır:
@@ -190,8 +186,6 @@ Sunum ve model uyumluluğu için modüller bu şekilde eşleştirilir:
 ---
 
 ## İstatistiksel Görseller
-
-Bu bölüm, sunumda kullandığın test akışını GitHub üzerinde görsel olarak da takip edebilmek için eklendi.
 
 ### 1) Geliş süresi ham dağılım görünümü
 
@@ -390,20 +384,6 @@ web/
 - `bottlenecks[]`
 - `recommendations[]`
 - `summary_lines[]`
-
----
-
-## Sunum ve Dokümantasyon Entegrasyonu
-
-Bu README, teknik döküm + sunum anlatımını birlikte taşıyacak şekilde tasarlanmıştır.  
-Yeni sunum içeriklerini hızlıca eklemek için önerilen bölüm yapısı:
-
-- **Sunum Akışı / Görsel Seti**
-- **Hipotezler ve Test Sonuçları**
-- **Darboğaz Öncesi-Sonrası Karşılaştırma**
-- **İyileştirme Senaryoları ve KPI Etkileri**
-
-İstersen bir sonraki adımda gönderdiğin görselleri `docs/images/` klasörüne alıp bu README’ye görsel galerili bir bölüm de ekleyebilirim.
 
 ---
 
