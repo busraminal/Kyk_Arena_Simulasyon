@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "title": "KYK Yemekhane Simulasyonu",
+    "sourceNote": "Arena Summary (.out) otomatik parse edildi",
+    "replicationLengthHours": 6.0,
+    "baseTimeUnits": "Hours",
+    "replications": 1,
+    "license": "STUDENT"
+  },
+  "resources": [
+    "Kahve_Alani_Koltuk",
+    "Cop_Kovasi_Alani",
+    "sandaye ve masa",
+    "Kahve_Makinesi",
+    "Et_Servis_Personeli",
+    "Parmak �zi Cihaz�",
+    "Sebze_Servis_Personeli",
+    "Kantin_Gorevlisi"
+  ],
+  "throughput": {
+    "entityNumberIn": 24,
+    "entityNumberOut": 22,
+    "systemNumberOut": 22,
+    "inSystemEstimate": 2
+  },
+  "wip": {
+    "average": 1.5053,
+    "maximum": 3.0,
+    "final": 2.0
+  },
+  "tally": {
+    "entityAvgHours": {
+      "waitTime": 0.0,
+      "totalTime": 0.0
+    }
+  },
+  "resourceUtilization": [
+    {
+      "key": "Kahve_Alani_Koltuk",
+      "label": "Kahve_Alani_Koltuk",
+      "utilization": 0.0
+    },
+    {
+      "key": "Cop_Kovasi_Alani",
+      "label": "Cop_Kovasi_Alani",
+      "utilization": 0.0
+    },
+    {
+      "key": "sandaye_ve_masa",
+      "label": "sandaye ve masa",
+      "utilization": 0.0
+    },
+    {
+      "key": "Kahve_Makinesi",
+      "label": "Kahve_Makinesi",
+      "utilization": 0.0
+    },
+    {
+      "key": "Et_Servis_Personeli",
+      "label": "Et_Servis_Personeli",
+      "utilization": 0.0
+    },
+    {
+      "key": "Parmak_zi_Cihaz",
+      "label": "Parmak �zi Cihaz�",
+      "utilization": 0.0
+    },
+    {
+      "key": "Sebze_Servis_Personeli",
+      "label": "Sebze_Servis_Personeli",
+      "utilization": 0.0
+    },
+    {
+      "key": "Kantin_Gorevlisi",
+      "label": "Kantin_Gorevlisi",
+      "utilization": 0.0
+    }
+  ],
+  "numberSeized": [
+    {
+      "label": "Kahve_Alani_Koltuk",
+      "value": 0.0
+    },
+    {
+      "label": "Cop_Kovasi_Alani",
+      "value": 0.0
+    },
+    {
+      "label": "sandaye ve masa",
+      "value": 0.0
+    },
+    {
+      "label": "Kahve_Makinesi",
+      "value": 0.0
+    },
+    {
+      "label": "Et_Servis_Personeli",
+      "value": 0.0
+    },
+    {
+      "label": "Parmak �zi Cihaz�",
+      "value": 0.0
+    },
+    {
+      "label": "Sebze_Servis_Personeli",
+      "value": 0.0
+    },
+    {
+      "label": "Kantin_Gorevlisi",
+      "value": 0.0
+    }
+  ],
+  "queueWaitingAvgHours": [
+    {
+      "label": "Ekmek_Bekleme_Noktasi",
+      "hours": 0.78372,
+      "observations": 2
+    }
+  ],
+  "queueLengthAvg": [
+    {
+      "label": "Et_Hatti",
+      "avg": 0.0
+    },
+    {
+      "label": "kahve_servis",
+      "avg": 0.0
+    },
+    {
+      "label": "Tepsi_Dokme",
+      "avg": 0.0
+    },
+    {
+      "label": "Masa_Kapma",
+      "avg": 0.0
+    },
+    {
+      "label": "Ekmek_Bekleme_Noktasi",
+      "avg": 0.26124
+    },
+    {
+      "label": "Sebze_Hatti",
+      "avg": 1.244
+    },
+    {
+      "label": "TC_Giris_Sureci",
+      "avg": 0.0
+    },
+    {
+      "label": "sabir",
+      "avg": 0.0
+    },
+    {
+      "label": "Tost_Siparisi",
+      "avg": 0.0
+    },
+    {
+      "label": "Kahve_Alani",
+      "avg": 0.0
+    }
+  ]
+}

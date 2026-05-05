@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "generatedUtc": "2026-05-05T07:00:57.313019+00:00",
+    "metricsNote": "Kaynak: arena-metrics.json (Arena Summary özeti)."
+  },
+  "bottlenecks": [
+    {
+      "type": "queue_wait_hours",
+      "queue": "Ekmek_Bekleme_Noktasi",
+      "hours": 0.78372
+    }
+  ],
+  "recommendations": [
+    "`Ekmek_Bekleme_Noktasi` ortalama bekleme ~47.0232 dk — süreç süresi veya kaynak sayısını gözden geçirin. Sunum eşlemesi: lojistik / stok — Hold–Signal ile takviye ve süre parametreleri.",
+    "Uygunluk testlerinde 1 ki-kare ve 0 KS reddi — Excel’deki dağılım varsayımları ile Arena’daki Random modüllerini hizalayın; reddedilen H0 güven aralıklarını etkiler. Sunum (PDF): reddedilen H₀ ile gözlenen ve beklenen uyumsuz; geliş süreleri için üstel uygunluk iddiasını gözden geçirin."
+  ],
+  "summary_lines": [
+    "İstatistik uyarısı: ki-kare reddi=1, KS reddi=0."
+  ]
+}

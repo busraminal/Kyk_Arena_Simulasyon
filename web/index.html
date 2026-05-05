@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KYK Yemekhane &mdash; Kapasite, darbo&#287;az ve Arena mod&#252;lleri</title>
+  <meta name="description" content="Pik saatte 5.000 ki&#351;ilik talep ve 2.000 ki&#351;ilik kapasite: KYK yemekhanede kuyruk, kasa ve parmak izi gibi darbo&#287;azlar&#305;n Arena DES ile analizi. Arena Mod&#252;lleriyle Yemekhane Sim&#252;lasyonu sunumuyla uyumlu &#246;zet." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="KYK Yemekhane &mdash; Kapasite, darbo&#287;az ve Arena mod&#252;lleri" />
+  <meta property="og:description" content="Pik saatte 5.000 ki&#351;ilik talep ve 2.000 ki&#351;ilik kapasite: KYK yemekhanede kuyruk, kasa ve parmak izi gibi darbo&#287;azlar&#305;n Arena DES ile analizi. Arena Mod&#252;lleriyle Yemekhane Sim&#252;lasyonu sunumuyla uyumlu &#246;zet." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="KYK Yemekhane &mdash; Kapasite, darbo&#287;az ve Arena mod&#252;lleri" />
+  <meta name="twitter:description" content="Pik saatte 5.000 ki&#351;ilik talep ve 2.000 ki&#351;ilik kapasite: KYK yemekhanede kuyruk, kasa ve parmak izi gibi darbo&#287;azlar&#305;n Arena DES ile analizi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Syne:wght@400;500;600;700;800&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a href="#" class="logo">
+      <span class="logo-mark" aria-hidden="true">&#9672;</span>
+      <span class="logo-text">KYK Sim&#252;lasyon Lab</span>
+    </a>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Men&#252;y&#252; a&#231;">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+    <nav id="primary-nav" class="nav" aria-label="Ana men&#252;">
+      <a href="#mantik">Mant&#305;k</a>
+      <a href="#model">Model</a>
+      <a href="#stat-testler">Ki-kare / KS</a>
+      <a href="#moduller">Mod&#252;ller</a>
+      <a href="#palet">Palet</a>
+    </nav>
+  </header>
+  <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">KYK yemekhane &#183; i&#351;leyi&#351; ve kapasite</p>
+          <h1>Arena ile yemekhane darbo&#287;azlar&#305;n&#305; g&#246;r&#252;n&#252;r k&#305;lmak</h1>
+          <p class="lead">
+            Pik saatlerde talep ile s&#305;n&#305;rl&#305; hizmet kapasitesi &#231;ak&#305;&#351;&#305;nca kuyruklar uzar; s&#305;cak yemek, &#246;deme (kasa) ve kimlik doğrulama gibi noktalar sistemi yava&#351;lat&#305;r.
+            Bu site, <em>Arena Mod&#252;lleriyle Yemekhane Sim&#252;lasyonu</em> sunumundaki anlat&#305; ve m&#252;hendislik kar&#351;&#305;l&#305;klar&#305;n&#305; &#246;zetler.
+          </p>
+          <div class="hero-actions">
+            <a href="#stat-testler" class="btn btn-primary">Ki-kare ve KS testleri</a>
+            <a href="#moduller" class="btn btn-outline">Arena mod&#252;lleri</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="&#214;zet">
+          <div class="panel-card">
+            <span class="panel-label">Problem</span>
+            <p>Yo&#287;unlukta bekleme, hizmet kalitesinin d&#252;&#351;mesi ve personelde dengesiz i&#351; y&#252;k&#252;.</p>
+          </div>
+          <div class="panel-card accent">
+            <span class="panel-label">Ama&#231;</span>
+            <p>Darbo&#287;azlar&#305; belirlemek, kuyruklar&#305; k&#305;saltmak ve kaynak kullan&#305;m&#305;n&#305; iyile&#351;tirmek.</p>
+          </div>
+        </aside>
+      </div>
+      <div class="hero-takeaways reveal" aria-label="Bir dakikada &#246;zet">
+        <h2 class="hero-takeaways-heading">Bir dakikada &#246;zet</h2>
+        <ol class="hero-takeaways-list">
+          <li><strong>Problem:</strong> Pik saatte y&#252;ksek talep ile s&#305;n&#305;rl&#305; kapasite &#231;ak&#305;&#351;&#305;nca kuyruk ve darbo&#287;azlar b&#252;y&#252;r.</li>
+          <li><strong>Y&#246;ntem:</strong> Arena ile ayr&#305;k olay sim&#252;lasyonu; Create&#8211;Process&#8211;Decide, Hold&#8211;Signal, Seize&#8211;Release ve mod&#252;l tablolar&#305; bu sitede &#246;zetlenir.</li>
+          <li><strong>&#199;&#305;kt&#305;:</strong> Ki-kare / Kolmogorov&#8211;Smirnov ile da&#287;&#305;l&#305;m uyumu ve Arena istatistikleriyle kapasite kararlar&#305;n&#305; desteklemek.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="mantik" class="section section-split section-split--logic">
+      <div class="section-intro reveal">
+        <h2>Sistem mant&#305;&#287;&#305;</h2>
+        <p>
+          &#214;&#287;renciler ayn&#305; anda sisteme girdi&#287;inde hizmet noktalar&#305;nda kuyruk olu&#351;ur; s&#305;cak yemek ve &#246;deme (kasa) yo&#287;unlu&#287;u tipik darbo&#287;azlard&#305;r.
+        </p>
+      </div>
+      <ul class="pill-list reveal">
+        <li><strong>Kapasite &#231;at&#305;&#351;mas&#305;:</strong> pik saatte y&#252;ksek talep (&#246;rn. 5.000) ile s&#305;n&#305;rl&#305; fiziksel kapasite (&#246;rn. 2.000 oturma).</li>
+        <li><strong>Kimlik:</strong> parmak izi okuyucuda hata oran&#305; manuel TC s&#252;recini uzat&#305;r; kuyruk b&#252;y&#252;r.</li>
+        <li><strong>Arena DES:</strong> Create&#8211;Process&#8211;Decide, Hold&#8211;Signal, Seize&#8211;Release ile ak&#305;&#351;, stok ve kaynaklar birlikte modellenir.</li>
+      </ul>
+    </section>
+
+    <section id="model" class="section section-model">
+      <div class="section-head section-head--compact reveal">
+        <h2>Model mimarisi &#8212; kapasite ve y&#246;netim</h2>
+      </div>
+
+      <p class="model-readme reveal">
+        A&#351;a&#287;&#305;daki yap&#305;, <em>Arena Mod&#252;lleriyle Yemekhane Sim&#252;lasyonu</em> belgesindeki katmanlara (giri&#351;, lojistik, kapasite, &#231;&#305;k&#305;&#351;) kar&#351;&#305;l&#305;k gelir; say&#305;sal sat&#305;rlar &#231;izim Spreadsheet&#8217;inizle ayn&#305; olmal&#305;d&#305;r.
+        Tablo ve blok ayr&#305;nt&#305;s&#305; i&#231;in <a href="#moduller">Mod&#252;ller</a>.
+      </p>
+
+      <div id="model-moduller" class="model-modules-band reveal">
+        <h3 class="model-modules-band__title">Sunumdaki Arena mod&#252;lleri &#8212; web &#246;zeti</h3>
+        <p class="model-modules-band__lead">
+          Create ile &#252;stel var&#305;&#351;, Assign ile tercih ve bakiye, Decide ile parmak izi ve stok dallar&#305;, Hold&#8211;Signal ile senkronizasyon, Seize&#8211;Release ile sandalye/masa kayna&#287;&#305;.
+          Kartlar &#8594; katman metni &#8594; Spreadsheet tablolar&#305;; derinlik i&#231;in <a href="#moduller">Mod&#252;ller</a>.
+        </p>
+        <div class="mod-mini-grid" aria-label="Mod&#252;l kartlar&#305;">
+          <article class="mod-mini-card"><h4>Create</h4><p><strong>Ogrenci_Girisi:</strong> Random (Expo), ortalama 1,5 dk, max 5000 var&#305;&#351;. <strong>ekmek:</strong> Random (Expo), ortalama 20 dk, max 50 var&#305;&#351;. &#304;kisi de Entity&nbsp;1, ba&#351;lang&#305;&#231; 0 dk.</p></article>
+          <article class="mod-mini-card"><h4>Record</h4><p>Sunumda vurgulanan performans &#246;l&#231;&#252;leri: sistemde kalma ve kuyruk bekleme s&#252;releri, kuyruk uzunlu&#287;u, hizmet g&#246;ren &#246;&#287;renci say&#305;s&#305;. &#199;izimde tally: <strong>Atik Kaydi</strong>, <strong>toplam_sure</strong>, <strong>et</strong>, <strong>sebze</strong>, <strong>baslangic_zamani</strong>.</p></article>
+          <article class="mod-mini-card"><h4>Assign / Assign Attribute</h4><p>Sunum: yemek tercihi (et / tavuk / vejetaryen vb.), kart bakiyesi, i&#351;lem h&#305;z&#305;. Model &#246;zeti: <code>a_Yemek_Tercihi</code> DISC 70/30; <code>a_Butce</code> 15/85; <code>a_Sosyal_Mod</code> 30/70; <code>a_Sabir</code> TRIA(3,10,15); <code>a_Hiz</code> MAX+NORM; <code>baslangic_zaman</code>=TNOW.</p></article>
+          <article class="mod-mini-card mod-mini-card--logic-suite"><h4>Process &#183; Delay &#183; Seize / Release</h4><p><strong>Process:</strong> parmak izi okuma (sunumda ortalama birka&#231; saniye), s&#305;cak yemek servisi, yemek yeme (&#252;&#231;gen s&#252;re), &#246;deme; hatlarda genelde <strong>Seize&#8211;Delay&#8211;Release</strong>.</p><p><strong>Saf Delay:</strong> y&#252;r&#252;me vb. &#8212; <code>yurume_mesafesi</code>, <code>sabir</code>.</p><p><strong>Release:</strong> <code>Masayi_Bosalt</code> &#8594; <code>sandaye ve masa</code>.</p></article>
+          <article class="mod-mini-card"><h4>Decide</h4><p>Sunumda parmak izi hatas&#305; yakla&#351;&#305;k <strong>%15</strong>; manuel TC kolu kuyru&#287;u uzat&#305;r. &#199;izimde <strong>Parmak_Izi_Kontrol</strong> (%90 ba&#351;ar&#305; kolu), yemek hatt&#305; / ekmek sonras&#305;, <strong>Kantin_mi_Yemekhane_mi</strong> (bakiye), oturma ve kahve dallar&#305;.</p></article>
+          <article class="mod-mini-card"><h4>Clone</h4><p><strong>kahve_kopyala:</strong> 1 klon, hedef <code>kahve_alani_label</code>. Kahve kolunda paralel entity.</p></article>
+          <article class="mod-mini-card"><h4>Label / Go to Label</h4><p>Hedef etiket (<code>kahve_alani_label</code>) ve atlama; Clone ve dallar&#305; birbirine ba&#287;lar.</p></article>
+          <article class="mod-mini-card"><h4>Hold</h4><p>Stok bitti&#287;inde veya kapasite doldu&#287;unda ak&#305;&#351;&#305; bekletme (sunum: kazan de&#287;i&#351;imi / lojistik duraksama). Giri&#351; dolulu&#287;u ve ekmek beklemesi i&#231;in Hold; sab&#305;rs&#305;zl&#305;k i&#231;in <code>sabir</code> ve Remove.</p></article>
+          <article class="mod-mini-card"><h4>Signal</h4><p>Yeni yemek / takviye geldi&#287;inde bekleyen Hold&#8217;u uyand&#305;rma (&#246;rn. kod <strong>101</strong> ile <code>Ekmek_Bekleme_Noktasi</code>).</p></article>
+          <article class="mod-mini-card"><h4>Station / Route</h4><p>Durak noktas&#305; + istasyonlar aras&#305; transfer; PickStation se&#231;iminden sonra <strong>Route</strong> s&#252;resi (&#246;rn. 15 sn).</p></article>
+          <article class="mod-mini-card"><h4>PickStation</h4><p>Sunumdaki N-y&#246;nl&#252; hat se&#231;imi: &#246;&#287;renciyi uygun servis noktas&#305;na y&#246;nlendirme. &#199;izimde <code>HAT_SECIMI</code> (Minimum + NQ + en route), <strong>Station 2/3</strong> &#8594; Et / Sebze; Route 15 sn. Yan &#252;r&#252;n (&#246;rn. meze, ekmek) i&#231;in stoktan alma ad&#305;mlar&#305; sunumda ayr&#305;ca i&#351;lenir.</p></article>
+          <article class="mod-mini-card"><h4>Search / Remove</h4><p>Kuyruk &#351;art&#305;nda &#231;&#305;karma; sab&#305;rs&#305;zl&#305;k ve terk.</p></article>
+          <article class="mod-mini-card"><h4>Dispose</h4><p>&#220;&#231; &#231;&#305;k&#305;&#351; blo&#287;u: <code>ekmek_dispose</code>, binadan &#231;&#305;k&#305;&#351;, <code>sonra_gelmek_icin_cikar</code>; hepsinde <strong>Record Entity Statistics</strong> i&#351;aretli.</p></article>
+        </div>
+      </div>
+
+      <div class="model-detail-layout reveal">
+        <div class="model-detail-main">
+          <h3 id="model-katman" class="model-inline-h">Katmanlar &#8212; &#351;ema &#252;zerinden okuma</h3>
+          <ol class="model-outline model-outline--compact">
+            <li>
+              <strong>Giri&#351; katman&#305;:</strong> <strong>Create</strong> ile pik talep (&#252;stel var&#305;&#351;), <strong>Assign</strong> ile tercih ve bakiye; parmak izi / manuel TC <code>TC_Giris_Sureci</code> <strong>Process</strong>; y&#252;r&#252;me <code>yurume_mesafesi</code> <strong>Delay</strong>; s&#305;cak yemek hatt&#305; &#246;ncesi <strong>PickStation</strong> / <strong>Route</strong>.
+            </li>
+            <li>
+              <strong>Lojistik ve kapasite:</strong> Stok / takviye i&#231;in <strong>Hold</strong> + <strong>Signal</strong> (&#246;rn. ekmek 101); yemekhane dolulu&#287;u <code>yemekhane_girisine_kapasite</code> Hold; oturma i&#231;in sandalye&#8211;masa <strong>Seize</strong> / <code>Masayi_Bosalt</code> <strong>Release</strong> (sunumda 2.000 sandalye kayna&#287;&#305; vurgusu).
+            </li>
+            <li>
+              <strong>&#199;&#305;k&#305;&#351;:</strong> <strong>Decide</strong> ile kantin / yemekhane ve kahve kolu; <strong>Clone</strong> / <strong>Label</strong>; performans i&#231;in <strong>Record</strong>, sistemden ayr&#305;l&#305;&#351; <strong>Dispose</strong>.
+            </li>
+          </ol>
+
+          <h3 id="model-bolum4" class="model-inline-h model-h3-accent">Ak&#305;&#351; ad&#305;mlar&#305; &#8212; modele uygun &#246;zet</h3>
+
+          <details class="detail-fold" open>
+            <summary>Giri&#351; ve kimlik</summary>
+            <div class="detail-body">
+              <p>
+                <strong>Create</strong> var&#305;&#351;lar&#305;, <strong>Assignments</strong> &#246;znitelikleri ve <code>TC_Giris_Sureci</code> Process blo&#287;u;
+                devam&#305;nda y&#246;nlendirici <strong>Decide</strong> dallar&#305;na ge&#231;i&#351;.
+              </p>
+            </div>
+          </details>
+
+          <details class="detail-fold">
+            <summary>Yemekhane servisi ve hat se&#231;imi</summary>
+            <div class="detail-body">
+              <p>
+                <strong>PickStation</strong> <code>HAT_SECIMI</code> (Station 2/3, Route s&#252;resi); <code>Et_Hatti</code> ve <code>Sebze_Hatti</code>
+                <strong>Process</strong> sat&#305;rlar&#305; (Seize&#8211;Delay&#8211;Release). &#304;lgili <strong>Station</strong> Spreadsheet: <code>Et_Hatti_St</code>, <code>Sebze_Hatti_St</code>.
+              </p>
+            </div>
+          </details>
+
+          <details class="detail-fold">
+            <summary>Kapasite, ekmek ve masa</summary>
+            <div class="detail-body">
+              <p>
+                Yemekhane dolulu&#287;u <strong>Hold</strong> ile s&#305;n&#305;rlan&#305;r; ekmek taraf&#305;nda bekleme ve <strong>Signal</strong> (101);
+                yemek sonras&#305; <code>Masayi_Bosalt</code> ile kaynak <strong>Release</strong>.
+              </p>
+            </div>
+          </details>
+
+          <details class="detail-fold">
+            <summary>Kahve / kantin kolu</summary>
+            <div class="detail-body">
+              <p>
+                <strong>Decide</strong> ve <code>kahve_kopyala</code> <strong>Clone</strong> ile <code>kahve_alani_label</code>; kahve alan&#305; ve kasa s&#252;re&#231;leri ilgili <strong>Process</strong> sat&#305;rlar&#305;yla (&#246;rn. <code>Kahve_Alani</code>, <code>kahve_servis</code>) &#246;zetlenir.
+              </p>
+            </div>
+          </details>
+
+          <details class="detail-fold">
+            <summary>Sab&#305;rs&#305;zl&#305;k, kay&#305;t ve &#231;&#305;k&#305;&#351;</summary>
+            <div class="detail-body">
+              <p>
+                <code>sabir</code> <strong>Delay</strong>; gerekti&#287;inde <strong>Search</strong> / <strong>Remove</strong>. &#199;&#305;k&#305;&#351; &#246;ncesi <strong>Record</strong> tally&#8217;leri ve <code>ekmek_dispose</code> vb. <strong>Dispose</strong> bloklar&#305;.
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <aside class="model-data-aside" aria-label="Parametre &#246;zetleri">
+          <p class="model-data-aside__kicker">Arena Spreadsheet &#246;zetleri</p>
+          <p class="model-data-aside__intro">Sunumdaki say&#305;sal senaryo ile &#231;iziminizi e&#351;le&#351;tirin; tablolar &#252;stteki kartlarla ayn&#305; mant&#305;&#287;&#305; ta&#351;&#305;r.</p>
+
+          <div class="model-data-pair">
+            <div class="model-data-card">
+              <h3>Create</h3>
+              <div class="table-scroll">
+                <table class="param-table param-table--compact">
+                  <thead>
+                    <tr><th>Kaynak</th><th>&#220;stel ort.</th><th>Max var&#305;&#351;</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Ogrenci_Girisi</strong></td><td>1,5 dk</td><td>5000</td></tr>
+                    <tr><td><strong>ekmek</strong></td><td>20 dk</td><td>50</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="model-data-foot">Tip Random (Expo); entity/arrival 1; ilk olu&#351;um 0; <strong>Entity&nbsp;1</strong>.</p>
+            </div>
+            <div class="model-data-card">
+              <h3>Record</h3>
+              <div class="table-scroll">
+                <table class="param-table param-table--compact">
+                  <thead>
+                    <tr><th>Tally ad&#305;</th><th>Tan&#305;m</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Atik Kaydi</strong></td><td>1 rows</td></tr>
+                    <tr><td><strong>toplam_sure</strong></td><td>1 rows</td></tr>
+                    <tr><td><strong>et</strong></td><td>1 rows</td></tr>
+                    <tr><td><strong>sebze</strong></td><td>1 rows</td></tr>
+                    <tr><td><strong>baslangic_zamani</strong></td><td>1 rows</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <h3>Assign Attribute &#8212; Assignments</h3>
+          <div class="table-scroll">
+            <table class="param-table param-table--assign">
+              <thead>
+                <tr><th>&#214;znitelik</th><th>Expression</th><th>Not</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>a_Yemek_Tercihi</code></td><td><code>DISC(0.7, 1, 1.0, 2)</code></td><td>%70 / %30</td></tr>
+                <tr><td><code>a_Butce</code></td><td><code>DISC(0.15, 1, 1.0, 2)</code></td><td>%15 / %85</td></tr>
+                <tr><td><code>a_Sosyal_Mod</code></td><td><code>DISC(0.3, 1, 1.0, 2)</code></td><td>%30 / %70</td></tr>
+                <tr><td><code>a_Sabir</code></td><td><code>TRIA(3, 10, 15)</code></td><td>&#220;&#231;gen dk</td></tr>
+                <tr><td><code>a_Hiz</code></td><td><code>MAX(0.5, NORM(1.2, 0.2))</code></td><td>m/s &#246;l&#231;e&#287;i</td></tr>
+                <tr><td><code>baslangic_zaman</code></td><td><code>TNOW</code></td><td>Zaman damgas&#305;</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>&#214;nemli kapasiteler</h3>
+          <div class="table-scroll">
+            <table class="param-table">
+              <thead>
+                <tr><th>&#214;&#287;e</th><th>De&#287;er (&#246;rnek)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Pik talep (Create &#252;st s&#305;n&#305;r&#305;, sunum)</td><td>5000</td></tr>
+                <tr><td>Oturma / sandalye kapasitesi (sunum)</td><td>2000</td></tr>
+                <tr><td>Turnike (&#246;rnek &#231;izim)</td><td>2</td></tr>
+                <tr><td>Yemekhane i&#231;i masa oturumu (&#246;rnek tablo)</td><td>100 ki&#351;i</td></tr>
+                <tr><td>Kritik darbo&#287;az (sunum PDF)</td><td>&#214;ncelik kasa; ard&#305;ndan s&#305;cak yemek hatt&#305;, parmak izi %15, lojistik, 2k/5k kapasite</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Kaynak ve KPI</h3>
+          <ul class="aside-list aside-list--tight">
+            <li><strong>Sunumda izlenen kaynaklar:</strong> s&#305;cak yemek hatt&#305;, kasa, kantin, parmak izi cihaz&#305;, sandalye/masa; &#231;izimdeki adlarla e&#351;leyin.</li>
+            <li><strong>Sonu&#231; &#246;rne&#287;i (6 saat):</strong> 207 giri&#351;, 85 tam &#231;&#305;k&#305;&#351; &#8212; kalanlar sistemde; as&#305;l sorun tek tek bekleme s&#252;resinden &#231;ok s&#252;rekli kuyruk birikimi (sunum yorumu).</li>
+            <li><strong>&#304;yile&#351;tirme y&#246;nleri (PDF):</strong> kasada paralel &#246;deme / ikinci personel; s&#305;cak yemek ve kantin personeli; parmak izi cihaz&#305;; Hold&#8211;Signal ile lojistik; sandalye &#8594; &#246;rn. 2.300; kazan de&#287;i&#351;im s&#252;releri.</li>
+          </ul>
+        </aside>
+      </div>
+
+    </section>
+
+    <section id="stat-testler" class="section section-stat-fit">
+      <div class="section-head reveal">
+        <h2>Ki-kare ve Kolmogorov&#8211;Smirnov testleri</h2>
+        <p class="section-sub section-sub--one-line">
+          <em>Arena Mod&#252;lleriyle Yemekhane Sim&#252;lasyonu</em> sunumuyla hizal&#305;: &#246;rneklem <strong>n &#8776; 200</strong>, ki-kare ile kategorik uygunluk / ba&#287;&#305;ms&#305;zl&#305;k,
+          KS ile s&#252;re de&#287;i&#351;kenlerinin (&#246;rn. geli&#351; aral&#305;klar&#305;) se&#231;ilen da&#287;&#305;l&#305;ma uyumu.
+          Tablolar&#305; g&#252;ncellemek i&#231;in Excel ard&#305;ndan <strong>Raporu yenile</strong> (yerel sunucu).
+        </p>
+      </div>
+
+      <div class="stat-context-panel reveal">
+        <h3 class="stat-context-heading">Record ile &#246;l&#231;&#252;len performans g&#246;stergeleri</h3>
+        <p class="stat-context-lead">
+          Sunumda Record mod&#252;l&#252; ile toplanan &#231;&#305;kt&#305;lar &#351;unlar&#305; besler: ortalama sistemde kalma; s&#305;cak yemek, sandvi&#231; ve kasa kuyru&#287;unda bekleme;
+          kuyruk anl&#305;k ve maksimum uzunluk; hizmet alan &#246;&#287;renci say&#305;s&#305;. Ki-kare / KS sonu&#231;lar&#305; da&#287;&#305;l&#305;m varsay&#305;mlar&#305;n&#305;, Arena &#246;zetleri darbo&#287;azlar&#305; destekler.
+        </p>
+        <ul class="stat-context-list">
+          <li><strong>Zaman:</strong> yemekhanede toplam s&#252;re, hat bazl&#305; bekleme s&#252;releri (Time Interval).</li>
+          <li><strong>Kuyruk:</strong> anl&#305;k ve maksimum ki&#351;i say&#305;s&#305; (Count &#8212; Queue Length).</li>
+          <li><strong>Hizmet:</strong> sistemden &#231;&#305;k&#305;&#351; / tamamlanan &#246;&#287;renci (Count).</li>
+        </ul>
+
+        <h3 class="stat-context-heading">Sunumdaki kritik darbo&#287;azlar ve &#231;&#246;z&#252;m y&#246;nleri</h3>
+        <div class="table-scroll">
+          <table class="param-table param-table--compact stat-context-table">
+            <thead>
+              <tr>
+                <th>Darbo&#287;az</th>
+                <th>&#214;zet (sunum)</th>
+                <th>&#199;&#246;z&#252;m / iyile&#351;tirme</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Kasa (&#246;deme)</strong></td>
+                <td>T&#252;m &#246;&#287;renciler bu noktadan ge&#231;er; tek personel ile en kritik darbo&#287;az.</td>
+                <td>&#304;kinci kasiyer veya paralel &#246;deme noktas&#305;, s&#305;ra y&#246;netimi.</td>
+              </tr>
+              <tr>
+                <td><strong>S&#305;cak yemek hatt&#305;</strong></td>
+                <td>Y&#252;ksek talep ve uzun i&#351;lem s&#252;releri ile yo&#287;un kuyruk.</td>
+                <td>Servis personeli / mutfak h&#305;z&#305;, PickStation ile hat dengeleme.</td>
+              </tr>
+              <tr>
+                <td><strong>Kantin hatt&#305;</strong></td>
+                <td>Orta d&#252;zey talep; s&#305;n&#305;rl&#305; personel nedeniyle yo&#287;unluk.</td>
+                <td>Kantin kapasitesi ve personel plan&#305;.</td>
+              </tr>
+              <tr>
+                <td><strong>Parmak izi</strong></td>
+                <td>&#8776;%15 ba&#351;ar&#305;s&#305;zl&#305;k &#8594; manuel TC; kimlik gecikmesi kuyru&#287;u uzat&#305;r.</td>
+                <td>Ek okuyucu; Decide ile hata oran&#305;n&#305;n modele yans&#305;mas&#305;n&#305; do&#287;rulama.</td>
+              </tr>
+              <tr>
+                <td><strong>Lojistik / stok</strong></td>
+                <td>Stok t&#252;kenmesi, kazan de&#287;i&#351;imi gibi duraksamalar.</td>
+                <td>Hold&#8211;Signal ile takviye; ta&#351;&#305;ma s&#252;releri ve kapasite parametreleri.</td>
+              </tr>
+              <tr>
+                <td><strong>Oturma kapasitesi</strong></td>
+                <td>&#8776;2.000 sandalye &#8212; 5.000 talep; turnike sonras&#305; y&#305;&#287;&#305;&#351;ma.</td>
+                <td>Masa&#8211;sandalye art&#305;&#351;&#305; (&#246;rn. 2.300), alan ve ak&#305;&#351; senaryolar&#305;.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="stat-tests-mount" class="stat-fit-mount"></div>
+
+      <div class="stat-workflow-panel workflow-panel--simple reveal">
+        <header class="workflow-panel-head">
+          <h3 class="stat-workflow-title workflow-panel-title-tight">Raporu yenile</h3>
+          <p class="workflow-panel-lead">
+            Sunucuya <strong>Arena &#246;zeti</strong> (JSON) ve iste&#287;e ba&#287;l&#305; <strong>Excel</strong> g&#246;nderilir; ki-kare / KS ve darbo&#287;az raporu yeniden &#252;retilir.
+          </p>
+        </header>
+
+        <details class="detail-fold workflow-help-fold reveal">
+          <summary>Yerel sunucu nas&#305;l a&#231;&#305;l&#305;r?</summary>
+          <div class="detail-body workflow-help-body">
+            <p class="workflow-help-text">
+              &#214;nce backend&#8217;i &#231;al&#305;&#351;t&#305;r&#305;n; sayfay&#305; <code class="mono-inline">http://127.0.0.1:8765/</code> adresinden a&#231;&#305;n (<code class="mono-inline">file://</code> ile bu panel &#231;al&#305;&#351;maz).
+            </p>
+            <pre class="workflow-help-code"><code>python -m uvicorn backend.app:app --host 127.0.0.1 --port 8765</code></pre>
+          </div>
+        </details>
+
+        <p id="server-runner-status" class="workflow-status-badge" role="status">Sunucu kontrol ediliyor&#8230;</p>
+
+        <div class="workflow-body">
+          <div class="workflow-field workflow-field--metrics">
+            <label class="workflow-field-label" for="advisor-metrics-textarea">Arena &#246;zeti</label>
+            <p class="workflow-field-hint"><code class="mono-inline">arena-metrics.json</code> i&#231;eri&#287;i</p>
+            <textarea id="advisor-metrics-textarea" class="mono-textarea workflow-metrics-input" rows="6" spellcheck="false" placeholder='{"meta": ...}'></textarea>
+          </div>
+
+          <div class="workflow-files-inline">
+            <div class="workflow-file-slot">
+              <label class="workflow-file-slot-label" for="server-excel-upload">Excel <span class="workflow-opt">&#8212; iste&#287;e ba&#287;l&#305;</span></label>
+              <input type="file" id="server-excel-upload" class="workflow-file-input workflow-file-input--slot" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" aria-label="Excel y&#252;kle" />
+            </div>
+            <div class="workflow-file-slot">
+              <label class="workflow-file-slot-label" for="advisor-metrics-file">JSON dosyas&#305;</label>
+              <input type="file" id="advisor-metrics-file" class="workflow-file-input workflow-file-input--slot" accept=".json,application/json" aria-label="JSON dosyas&#305;" />
+            </div>
+            <div class="workflow-file-slot">
+              <label class="workflow-file-slot-label" for="arena-out-upload">Arena .out</label>
+              <input type="file" id="arena-out-upload" class="workflow-file-input workflow-file-input--slot" accept=".out,text/plain" aria-label="Arena .out dosyas&#305;" />
+            </div>
+          </div>
+
+          <div class="workflow-cta-row">
+            <button type="button" class="btn btn-primary" id="server-run-regenerate" disabled>Raporu yenile</button>
+            <button type="button" class="btn btn-outline" id="server-run-bottleneck" disabled>Sadece darbo&#287;az</button>
+            <button type="button" class="btn btn-outline" id="server-run-arena-out" disabled>.out analizi</button>
+            <button type="button" class="btn btn-outline" id="advisor-load-current-metrics">Metrikleri y&#252;kle</button>
+          </div>
+          <p class="workflow-cta-note">Tam rapor: testler + grafikler + darbo&#287;az. <strong>Sadece darbo&#287;az</strong> daha h&#305;zl&#305;d&#305;r.</p>
+        </div>
+
+        <details class="detail-fold workflow-extra reveal">
+          <summary>Geli&#351;mi&#351;: token, terminal, taray&#305;c&#305; &#246;nizlemesi</summary>
+          <div class="detail-body workflow-extra-body">
+            <label class="stat-workflow-label" for="server-api-token">X-API-Token</label>
+            <div class="workflow-token-row">
+              <input type="password" id="server-api-token" class="server-runner-token" autocomplete="off" placeholder="Yaln&#305;zca KYK_API_TOKEN kullan&#305;yorsan&#305;z" />
+              <button type="button" class="btn btn-ghost btn-sm" id="server-api-token-retry">Sunucuyu tekrar kontrol et</button>
+            </div>
+            <div class="workflow-preview-row">
+              <button type="button" class="btn btn-outline btn-sm" id="advisor-analyze-browser">Darbo&#287;az &#246;nizlemesi (sunucu olmadan)</button>
+              <span class="workflow-preview-note">Yakla&#351;&#305;k &#246;neri; kesin sonu&#231; i&#231;in &#252;stteki <strong>Raporu yenile</strong>.</span>
+            </div>
+          </div>
+        </details>
+
+        <pre id="server-run-output" class="server-run-output workflow-terminal-log" hidden></pre>
+
+        <div id="advisor-live-feedback" class="advisor-feedback" aria-live="polite"></div>
+        <div id="advisor-browser-report-mount"></div>
+        <div id="advisor-python-report-mount"></div>
+      </div>
+    </section>
+
+    <section id="moduller" class="section section-modules">
+      <div class="section-head reveal">
+        <h2>Arena mod&#252;leri: ne &#183; nas&#305;l &#183; neden</h2>
+        <p class="section-sub">
+          Arena&#8217;da her blok, sunumda anlat&#305;lan ger&#231;ek s&#252;re&#231; ad&#305;m&#305;n&#305;n kar&#351;&#305;l&#305;&#287;&#305;d&#305;r: giri&#351; (Create), kimlik ve servis (Process), stok ve y&#246;nlendirme (Decide, Hold&#8211;Signal), oturma (Seize&#8211;Release), &#231;&#305;k&#305;&#351; (Dispose).
+          &#304;ki <strong>Create</strong> blo&#287;u &#8212; <strong>Ogrenci_Girisi</strong> (&#252;stel, 1,5 dk ort., max 5000) ve <strong>ekmek</strong> (20 dk ort., max 50) &#8212; talebi katmanlara ay&#305;r&#305;r.
+        </p>
+        <p class="section-sub section-sub--muted">
+          B&#252;&#351;ra Mina AL, Ebru KARAMAN, G&#252;lnaz AYDEMIR &mdash; <em>Arena Mod&#252;lleriyle Yemekhane Sim&#252;lasyonu</em> (KYK yemekhane i&#351;leyi&#351;i, kapasite ve y&#246;netimi).
+        </p>
+        <p class="module-table-preamble reveal">
+          <strong>Sunum ipucu:</strong> Her sat&#305;rda &#246;nce <em>Rol&#252;</em> ile mod&#252;l&#252;n sistemdeki i&#351;levini, <em>Nas&#305;l</em> ile Arena&#8217;da nerede ayarland&#305;&#287;&#305;n&#305;, <em>Neden / ama&#231;</em> ile j&#252;riye hangi soruyu cevaplad&#305;&#287;&#305;n&#305;z&#305; s&#246;yleyin (talep, darbo&#287;az, senkronizasyon, &#246;l&#231;&#252;m).
+        </p>
+      </div>
+      <nav class="module-toc reveal" aria-label="Mod&#252;ller b&#246;l&#252;m&#252; i&#231;indekiler">
+        <span class="module-toc-label">Bu b&#246;l&#252;mden:</span>
+        <a href="#modul-ozet-tablosu">&#214;zet tablo</a>
+        <a href="#modul-create">Create</a>
+        <a href="#modul-record">Record</a>
+        <a href="#modul-assignments">Assignments</a>
+        <a href="#modul-decide">Decide</a>
+        <a href="#modul-clone">Clone</a>
+        <a href="#modul-label">Label</a>
+        <a href="#modul-process">Process</a>
+        <a href="#modul-hold">Hold / Signal</a>
+        <a href="#modul-station-route">Station / Route</a>
+        <a href="#modul-pickstation">PickStation</a>
+        <a href="#modul-dispose">Dispose</a>
+      </nav>
+      <div id="modul-ozet-tablosu" class="module-table-wrap module-table-wrap--sticky-first reveal">
+        <table class="module-table module-table--sticky-first">
+          <thead>
+            <tr>
+              <th>Mod&#252;l / blok</th>
+              <th>Rol&#252;</th>
+              <th>Nas&#305;l kullan&#305;l&#305;r</th>
+              <th>Neden (kullan&#305;m amac&#305;)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Create</strong></td>
+              <td>Sim&#252;lasyon saatine g&#246;re yeni entity (&#246;&#287;renci / ekmek) &#252;reterek talep katman&#305;n&#305; kurar.</td>
+              <td>Spreadsheet&#8217;ta <strong>Random (Expo)</strong>: Value ortalama var&#305;&#351; aral&#305;&#287;&#305;, Units dk/saat vb.; Entities per Arrival ve Max Arrivals ile &#252;st s&#305;n&#305;r.</td>
+              <td><strong>Ama&#231;:</strong> Ger&#231;ek&#231;i giri&#351; yo&#287;unlu&#287;u (pik saat) ve ikinci bir talep kayna&#287;&#305; (ekmek) olmadan kuyruk ve bekleme analizi yap&#305;lamaz; sunumda &#8220;talep nereden geliyor?&#8221; sorusunun cevab&#305;d&#305;r. &#199;izimde ana ak&#305;&#351; 1,5 dk ort., max 5000; ekmek 20 dk ort., max 50.</td>
+            </tr>
+            <tr>
+              <td><strong>Process</strong></td>
+              <td>Bir istasyon veya hizmette ge&#231;irilen s&#252;reyi ve o s&#252;re i&#231;indeki <strong>mant&#305;ksal ad&#305;mlar&#305;</strong> (Seize&#8211;Delay&#8211;Release vb.) tek blokta toplar.</td>
+              <td>Spreadsheet&#8217;ta <strong>Action</strong> sat&#305;rlar&#305;: genelde <strong>Seize</strong> &#8594; <strong>Delay</strong> &#8594; <strong>Release</strong>; s&#252;re Expression/da&#287;&#305;l&#305;m, kuyruk disiplini ve &#246;ncelik.</td>
+              <td><strong>Ama&#231;:</strong> Parmak izi, s&#305;cak yemek, kasa, yemek yeme gibi ad&#305;mlar&#305; tek &#231;er&#231;evede modellemek; s&#252;re ve kaynak kullan&#305;m&#305;n&#305; birlikte &#246;l&#231;mek i&#231;in (darbo&#287;az tespiti).</td>
+            </tr>
+            <tr>
+              <td><strong>Seize</strong></td>
+              <td>Entity&#8217;nin belirli bir <strong>Resource</strong> veya <strong>Set</strong>&#8217;ten kapasite talep etmesi; kaynak doluysa kuyrukta bekler.</td>
+              <td><strong>Process</strong> i&#231;inde Action olarak veya &#231;izimde ayr&#305; mod&#252;l; Spreadsheet&#8217;ta kaynak ad&#305;, talep edilen birim say&#305;s&#305;, gerekirse Set se&#231;imi.</td>
+              <td><strong>Ama&#231;:</strong> Masa, sandalye, hat personeli gibi <strong>s&#305;n&#305;rl&#305; kapasiteyi</strong> fiziksel olarak temsil etmek; &#8220;kim neyi ne kadar s&#252;re tutuyor?&#8221; sorusunun temelidir (Release ile &#231;ift).</td>
+            </tr>
+            <tr>
+              <td><strong>Release</strong></td>
+              <td>Seize ile al&#305;nan kayna&#287;&#305; iade ederek kapasiteyi yeniden modele a&#231;ar; bir sonraki entity&#8217;nin ilerlemesine izin verir.</td>
+              <td><strong>Process</strong> i&#231;i Logic ile birlikte kullan&#305;l&#305;r veya &#231;izimde <strong>ayr&#305; Release mod&#252;l&#252;</strong>; Spreadsheet&#8217;ta Name, <strong>Resources</strong> alt diyalogunda Type / kaynak ad&#305; / birim.</td>
+              <td><strong>Ama&#231;:</strong> Oturma bitti&#287;inde masay&#305; bo&#351;altmak; &#246;rn. <code>Masayi_Bosalt</code> ile <code>sandaye ve masa</code> kayna&#287;&#305;ndan <strong>1</strong> birim serbest b&#305;rakmak &#8212; aksi halde sistem sonsuza dek dolu kal&#305;r.</td>
+            </tr>
+            <tr>
+              <td><strong>Delay</strong></td>
+              <td>Zaman ilerletir; <strong>kaynak tutmadan</strong> sadece s&#252;re ge&#231;irmek i&#231;in kullan&#305;l&#305;r (y&#252;r&#252;me, sab&#305;r vb.).</td>
+              <td><strong>Process</strong> Spreadsheet&#8217;ta <strong>Action</strong> yaln&#305;zca Delay olabilir (Expression, &#252;&#231;gen, sabit vb.); &#231;izimde <strong>ayr&#305; Delay mod&#252;l&#252;</strong> de seyrek kullan&#305;l&#305;r.</td>
+              <td><strong>Ama&#231;:</strong> Yol ve bekleme s&#252;relerini kaynak kuyru&#287;una kar&#305;&#351;t&#305;rmadan modellemek; &#246;rn. <code>yurume_mesafesi</code> <code>15 / a_Hiz</code> sn, <code>sabir</code> <code>TRIA(5,10,20)</code> sn.</td>
+            </tr>
+            <tr>
+              <td><strong>Hold</strong></td>
+              <td>Entity&#8217;yi belirli bir <strong>ko&#351;ul veya sinyal</strong> ger&#231;ekle&#351;ene kadar durdurur; senkronizasyon ve kapasite e&#351;i&#287;i i&#231;in kullan&#305;l&#305;r.</td>
+              <td><strong>Wait for Signal</strong> / <strong>Scan for Condition</strong>; kuyruk ad&#305;; Spreadsheet&#8217;ta <code>NQ(...)</code> ile kapasite.</td>
+              <td><strong>Ama&#231;:</strong> Ekmek takviyesi veya i&#231;erideki kalabal&#305;k e&#351;i&#287;i gibi <strong>olay tetiklemeli</strong> bekleme; <code>Ekmek_Bekleme_Noktasi</code> (sinyal 101), <code>yemekhane_girisine_kapasite</code> (kuyruk &lt; 100). Signal ile &#231;ift &#231;al&#305;&#351;&#305;r.</td>
+            </tr>
+            <tr>
+              <td><strong>Signal</strong></td>
+              <td>Hold&#8217;da bekleyen entity&#8217;lere &#8220;devam&#8221; mesaj&#305; g&#246;nderir; model i&#231;i olay haberle&#351;mesidir.</td>
+              <td>Spreadsheet&#8217;ta g&#246;nderilen sinyal de&#287;eri; <strong>Hold</strong> (Wait for Signal) ile ayn&#305; kod e&#351;le&#351;meli.</td>
+              <td><strong>Ama&#231;:</strong> Zamanla gelen takviye veya d&#305;&#351; tetikleyici ile bekleyen kuyru&#287;u uyand&#305;rmak; &#246;rn. <code>Ekmek_Takviye_Zamani</code> de&#287;er <strong>101</strong> &#8594; <code>Ekmek_Bekleme_Noktasi</code> Hold ile e&#351;le&#351;ir.</td>
+            </tr>
+            <tr>
+              <td><strong>Station</strong></td>
+              <td>Entity&#8217;nin hangi fiziksel/mant&#305;ksal noktada oldu&#287;unu Arena&#8217;ya bildirir; <strong>PickStation / Route</strong> ile birlikte hareket ve kuyruk hedefi tan&#305;mlar.</td>
+              <td><strong>Station Spreadsheet</strong>: mod&#252;l ad&#305; (<code>Et_Hatti_St</code>, <code>Sebze_Hatti_St</code>) ile Arena <strong>Station Name</strong> (Station 2 / 3) e&#351;lenir; kuyruk genelde <code>*.Queue</code>.</td>
+              <td><strong>Ama&#231;:</strong> Et / sebze hatt&#305; gibi <strong>paralel servis noktalar&#305;n&#305;</strong> ay&#305;r&#305;p PickStation&#8217;la en uygun hatta y&#246;nlendirmek; gelen entity ilgili Process&#8217;te <code>Et_Hatti</code> / <code>Sebze_Hatti</code> kayna&#287;&#305;n&#305; Seize eder.</td>
+            </tr>
+            <tr>
+              <td><strong>Route</strong></td>
+              <td>&#304;stasyonlar veya alanlar aras&#305;nda <strong>hareket s&#252;resi</strong> ekler; mek&#226;nsal mesafeyi zamana &#231;evirir.</td>
+              <td>Transfer s&#252;resi ve birim (saniye/dakika); PickStation <strong>Route</strong> modunda kullan&#305;l&#305;r.</td>
+              <td><strong>Ama&#231;:</strong> Hat se&#231;iminden sonra istasyona var&#305;&#351; s&#252;resini saymak (&#246;rn. <code>HAT_SECIMI</code> sonras&#305; 15&nbsp;s); kamp&#252;s y&#252;r&#252;mesi ayr&#305;ca <code>yurume_mesafesi</code> ile.</td>
+            </tr>
+            <tr>
+              <td><strong>PickStation</strong></td>
+              <td>Birden fazla <strong>Station</strong> aday&#305; aras&#305;ndan kurala g&#246;re birini se&#231;er; dinamik y&#246;nlendirme mod&#252;l&#252;d&#252;r.</td>
+              <td>Aday <strong>Station</strong> k&#252;mesinden kurala g&#246;re birini se&#231;er (NQ, mesafe, s&#305;ra vb.).</td>
+              <td><strong>Ama&#231;:</strong> Kalabal&#305;k hatta y&#246;nlendirmeyi &#246;nlemek veya en k&#305;sa kuyru&#287;u se&#231;mek; projede <code>HAT_SECIMI</code> <strong>Minimum</strong> testi, <code>Et_Hatti.Queue</code> / <code>Sebze_Hatti.Queue</code>, ard&#305;ndan <strong>Route</strong> 15&nbsp;s.</td>
+            </tr>
+            <tr>
+              <td><strong>Decide</strong></td>
+              <td>Olas&#305;l&#305;k veya entity &#246;zniteli&#287;ine g&#246;re <strong>ak&#305;&#351; dallar&#305;</strong> olu&#351;turur; heterojen davran&#305;&#351; &#252;retir.</td>
+              <td><strong>2-way by Chance</strong> (Percent True) veya <strong>2-way by Condition</strong> (Attribute, Is, Value).</td>
+              <td><strong>Ama&#231;:</strong> Ger&#231;ek&#231;i &#231;e&#351;itlilik (tercih, b&#252;t&#231;e, sosyal mod); Parmak_Izi_Kontrol (%90), Yemek_Hatti / Ekmek sonras&#305; (<code>a_Yemek_Tercihi</code>), Kantin_mi_Yemekhane_mi (<code>a_Butce</code>), Oturma_Alani (%60), Kahve (<code>a_Sosyal_Mod</code>).</td>
+            </tr>
+            <tr>
+              <td><strong>Clone</strong></td>
+              <td>Tek entity&#8217;den <strong>birden fazla paralel alt ak&#305;&#351;</strong> &#252;retir (ana yol + yan dal).</td>
+              <td>Spreadsheet&#8217;ta Name + <strong>Clone Branches</strong>; alt diyalogda <strong># of Clones</strong> ve <strong>Clone Destination Label Name</strong>.</td>
+              <td><strong>Ama&#231;:</strong> Ayn&#305; ki&#351;inin ana yemekhane ak&#305;&#351;&#305;ndan ba&#287;&#305;ms&#305;z bir yan aktiviteye (&#246;rn. kahve) gitmesini modellemek; <code>kahve_kopyala</code> &#8594; <code>kahve_alani_label</code>.</td>
+            </tr>
+            <tr>
+              <td><strong>Label</strong></td>
+              <td>Diyagramda <strong>isimli bir durak</strong>; Clone veya Go to Label i&#231;in hedef adres g&#246;revi g&#246;r&#252;r.</td>
+              <td>&#199;izimde isimlendirilmi&#351; durak noktas&#305;; ba&#351;ka mod&#252;llerde bu ada referans verilir.</td>
+              <td><strong>Ama&#231;:</strong> &#199;apraz referans ve okunabilirlik; <code>kahve_alani_label</code> gibi hedefler diyagram&#305; sade tutar.</td>
+            </tr>
+            <tr>
+              <td><strong>Go to Label</strong></td>
+              <td>Ko&#351;ulsuz olarak ak&#305;&#351;&#305; ba&#351;ka bir diyagram b&#246;l&#252;m&#252;ne <strong>z&#305;plat&#305;r</strong>; dallanma olmadan s&#252;reklilik sa&#287;lar.</td>
+              <td>Ak&#305;&#351;&#305; se&#231;ilen Label sat&#305;r&#305;na aktar&#305;r.</td>
+              <td><strong>Ama&#231;:</strong> B&#252;y&#252;k modeli tek sayfada tutmak; fiziksel olarak uzak bloklar&#305; &#231;izgiyi k&#305;rmadan birle&#351;tirmek.</td>
+            </tr>
+            <tr>
+              <td><strong>Assign Attribute</strong></td>
+              <td>Her entity i&#231;in <strong>ki&#351;isel veri</strong> (tercih, h&#305;z, sab&#305;r vb.) tutar; Decide ve Delay ifadelerinin girdisidir.</td>
+              <td><strong>Assignments</strong> diyalo&#287;unda Type + Attribute Name + New Value; projede <code>DISC</code>, <code>TRIA</code>, <code>NORM</code>, <code>TNOW</code>.</td>
+              <td><strong>Ama&#231;:</strong> Homojen &#8220;tek tip &#246;&#287;renci&#8221; yerine &#231;e&#351;itli davran&#305;&#351;; <code>a_Yemek_Tercihi</code>, <code>a_Butce</code>, <code>a_Sosyal_Mod</code>, <code>a_Sabir</code>, <code>a_Hiz</code>, <code>baslangic_zaman</code>.</td>
+            </tr>
+            <tr>
+              <td><strong>Assign</strong></td>
+              <td>Global <strong>Variable</strong> veya ortak saya&#231; g&#252;nceller; senaryo parametreleri ve ko&#351;ullar i&#231;in kullan&#305;l&#305;r.</td>
+              <td>Genelde global <strong>Variable</strong> veya &#231;oklu atama sat&#305;r&#305;; Expression ile y&#252;zde veya durum.</td>
+              <td><strong>Ama&#231;:</strong> Y&#246;nlendirme paylar&#305;, saya&#231;lar, senaryo de&#287;i&#351;kenleri; Process &#246;ncesi ko&#351;ullar&#305; haz&#305;rlamak.</td>
+            </tr>
+            <tr>
+              <td><strong>Record / Statistic</strong></td>
+              <td>Sim&#252;lasyon s&#305;ras&#305;nda g&#246;zlemlenen de&#287;erleri <strong>Tally / istatistik</strong> olarak kaydeder; rapor ve do&#287;rulama i&#231;indir.</td>
+              <td>Tally tan&#305;m&#305;n&#305; Data Definition&#8217;a ba&#287;lar; Spreadsheet&#8217;ta Name + Statistic Definitions (sat&#305;r say&#305;s&#305;) ile listelenir.</td>
+              <td><strong>Ama&#231;:</strong> &#199;&#305;kt&#305;lar&#305; say&#305;salla&#351;t&#305;rmak; <strong>Atik Kaydi</strong>, <strong>toplam_sure</strong>, hat <strong>et</strong> / <strong>sebze</strong>, <strong>baslangic_zamani</strong> (Ki-kare / Arena &#246;zetleriyle ili&#351;ki).</td>
+            </tr>
+            <tr>
+              <td><strong>Resource / Set</strong></td>
+              <td>Payla&#351;&#305;lan kapasiteyi (personel, masa, hat) <strong>havuz</strong> olarak tan&#305;mlar; Seize&#8211;Release ile t&#252;ketilir.</td>
+              <td>Payla&#351;&#305;lan personel veya fiziksel kapasite tan&#305;m&#305;</td>
+              <td><strong>Ama&#231;:</strong> Darbo&#287;azlar&#305; g&#246;r&#252;n&#252;r k&#305;lmak; kapasite art&#305;r-azalt senaryolar&#305;n&#305;n etkisini do&#287;rudan &#246;l&#231;mek.</td>
+            </tr>
+            <tr>
+              <td><strong>Queue</strong> (&#246;rt&#252;k)</td>
+              <td>Kaynak veya Process &#246;n&#252;nde biriken entity&#8217;lerin <strong>bekleme s&#305;ras&#305;</strong>; FIFO vb. disiplinle y&#246;netilir.</td>
+              <td>Process ile birlikte FIFO vb. disiplin</td>
+              <td><strong>Ama&#231;:</strong> G&#246;r&#252;nmez s&#305;ray&#305; istatisti&#287;e d&#246;k&#252;mek; kalabal&#305;k ve bekleme s&#252;resi analizi.</td>
+            </tr>
+            <tr>
+              <td><strong>Dispose</strong></td>
+              <td>Entity&#8217;nin sistemden &#231;&#305;k&#305;&#351;&#305;; ak&#305;&#351; sonland&#305;r&#305;l&#305;r, gerekirse son istatistik kayd&#305; tetiklenir.</td>
+              <td>Name + <strong>Record Entity Statistics</strong> (&#246;rn. i&#351;aretli); Comment opsiyonel.</td>
+              <td><strong>Ama&#231;:</strong> Ziyareti kapatmak ve &#246;l&#231;&#252;m&#252; tamamlamak; <code>ekmek_dispose</code>, binadan &#231;&#305;k&#305;&#351;, &#8220;sonra gelmek i&#231;in&#8221; ge&#231;i&#351;i &#8212; Arena &#246;zetine akar.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-create" class="module-instance-heading reveal">Arena&#8217;daki Create parametreleri (proje de&#287;erleri)</h3>
+      <p class="module-instance-lead reveal">
+        Mod&#252;l panelinde ye&#351;il <strong>Create</strong> bloklar&#305;n&#305;n Spreadsheet View sat&#305;rlar&#305; &#8212; g&#246;rsel yerine say&#305;sal kay&#305;t.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Entity Type</th>
+              <th>Type</th>
+              <th>Value</th>
+              <th>Units</th>
+              <th>Entities per Arrival</th>
+              <th>Max Arrivals</th>
+              <th>First Creation</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ogrenci_Girisi</strong></td>
+              <td>Entity&nbsp;1</td>
+              <td>Random (Expo)</td>
+              <td>1,5</td>
+              <td>Minutes</td>
+              <td>1</td>
+              <td>5000</td>
+              <td>0,0</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>ekmek</strong></td>
+              <td>Entity&nbsp;1</td>
+              <td>Random (Expo)</td>
+              <td>20</td>
+              <td>Minutes</td>
+              <td>1</td>
+              <td>50</td>
+              <td>0,0</td>
+              <td>&#8212;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-record" class="module-instance-heading reveal">Arena&#8217;daki Record tan&#305;mlar&#305; (proje)</h3>
+      <p class="module-instance-lead reveal">
+        Gri paneldeki <strong>Record</strong> mod&#252;l&#252;n&#252;n veri tablosu &#8212; her sat&#305;r bir tally kayd&#305;; tan&#305;m detay&#305; Arena&#8217;daki d&#252;&#287;meyle a&#231;&#305;lan diyalogda (&#246;rn. et / sebze say&#305;mlar&#305;) saklan&#305;r.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Statistic Definitions</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Atik Kaydi</strong></td>
+              <td>1 rows</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>toplam_sure</strong></td>
+              <td>1 rows</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>et</strong></td>
+              <td>1 rows</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>sebze</strong></td>
+              <td>1 rows</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>baslangic_zamani</strong></td>
+              <td>1 rows</td>
+              <td>&#8212;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-assignments" class="module-instance-heading reveal">Assignments diyalo&#287;u (proje de&#287;erleri)</h3>
+      <p class="module-instance-lead reveal">
+        <strong>Assign Attribute</strong> toplu atama penceresi; Record ile kar&#305;&#351;maz. Form&#252;llerdeki <code>DISC</code> birikimli olas&#305;l&#305;k ile kategorik de&#287;er &#252;retir.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Attribute Name</th>
+              <th>New Value</th>
+              <th>A&#231;&#305;klama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Attribute</td>
+              <td><code>a_Yemek_Tercihi</code></td>
+              <td><code>DISC(0.7, 1, 1.0, 2)</code></td>
+              <td>%70 &#8594; 1, %30 &#8594; 2</td>
+            </tr>
+            <tr>
+              <td>Attribute</td>
+              <td><code>a_Butce</code></td>
+              <td><code>DISC(0.15, 1, 1.0, 2)</code></td>
+              <td>%15 &#8594; 1, %85 &#8594; 2</td>
+            </tr>
+            <tr>
+              <td>Attribute</td>
+              <td><code>a_Sosyal_Mod</code></td>
+              <td><code>DISC(0.3, 1, 1.0, 2)</code></td>
+              <td>%30 &#8594; 1, %70 &#8594; 2</td>
+            </tr>
+            <tr>
+              <td>Attribute</td>
+              <td><code>a_Sabir</code></td>
+              <td><code>TRIA(3, 10, 15)</code></td>
+              <td>&#220;&#231;gen (dk benzeri birim, modele g&#246;re)</td>
+            </tr>
+            <tr>
+              <td>Attribute</td>
+              <td><code>a_Hiz</code></td>
+              <td><code>MAX(0.5, NORM(1.2, 0.2))</code></td>
+              <td>H&#305;z &#231;arpan&#305;; alt s&#305;n&#305;r + Normal</td>
+            </tr>
+            <tr>
+              <td>Attribute</td>
+              <td><code>baslangic_zaman</code></td>
+              <td><code>TNOW</code></td>
+              <td>Anl&#305;k sim&#252;lasyon saati</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-decide" class="module-instance-heading reveal">Decide Spreadsheet (proje de&#287;erleri)</h3>
+      <p class="module-instance-lead reveal">
+        Arena <strong>Decide</strong> mod&#252;lleri: <strong>2-way by Chance</strong> ile y&#252;zde, <strong>2-way by Condition</strong> ile <code>Attribute</code> &#252;zerinden ko&#351;ul (<code>==</code>).
+        Assign&#8217;daki <code>a_Yemek_Tercihi</code>, <code>a_Butce</code>, <code>a_Sosyal_Mod</code> burada dallanmay&#305; belirler.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact module-table--decide">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Percent True</th>
+              <th>If</th>
+              <th>Attribute Name</th>
+              <th>Is</th>
+              <th>Value</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Parmak_Izi_Kontrol</strong></td>
+              <td>2-way by Chance</td>
+              <td>90</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>Yemek_Hatti_Secimi</strong></td>
+              <td>2-way by Condition</td>
+              <td>&#8212;</td>
+              <td>Attribute</td>
+              <td><code>a_Yemek_Tercihi</code></td>
+              <td>==</td>
+              <td>1</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>Kantin_mi_Yemekhane_mi</strong></td>
+              <td>2-way by Condition</td>
+              <td>&#8212;</td>
+              <td>Attribute</td>
+              <td><code>a_Butce</code></td>
+              <td>==</td>
+              <td>1</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>Oturma_Alani_Secimi</strong></td>
+              <td>2-way by Chance</td>
+              <td>60</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>Kahve_Icer_mi</strong></td>
+              <td>2-way by Condition</td>
+              <td>&#8212;</td>
+              <td>Attribute</td>
+              <td><code>a_Sosyal_Mod</code></td>
+              <td>==</td>
+              <td>1</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><strong>Ekmek_Sonrasi_Yonlendirme</strong></td>
+              <td>2-way by Condition</td>
+              <td>&#8212;</td>
+              <td>Attribute</td>
+              <td><code>a_Yemek_Tercihi</code></td>
+              <td>==</td>
+              <td>1</td>
+              <td>&#8212;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-clone" class="module-instance-heading reveal">Clone mod&#252;l&#252; (Spreadsheet + Clone Branches)</h3>
+      <p class="module-instance-lead reveal">
+        <strong>Clone</strong>, Decide&#8217;dan farkl&#305;d&#305;r: kopya entity &#252;retir. Alt diyalog <strong>Clone Branches</strong> ka&#231; klon ve hangi <strong>Label</strong> ad&#305;na gidece&#287;ini tan&#305;mlar.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Clone Branches</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>kahve_kopyala</code></td>
+              <td>1 rows</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="module-instance-lead reveal module-instance-lead--tight"><strong>Clone Branches</strong> (alt pencere)</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th># of Clones</th>
+              <th>Clone Destination Label Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><code>kahve_alani_label</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-label" class="module-instance-heading reveal">Label ve Go to Label</h3>
+      <p class="module-instance-lead reveal">
+        &#199;izimdeki <strong>Label</strong> mod&#252;l&#252;, ak&#305;&#351;a isim verilen bir &#231;&#305;k&#305;&#351; noktas&#305;d&#305;r; <strong>Go to Label</strong> veya <strong>Clone</strong> hedefi bu ad&#305; kullan&#305;r.
+        Kahve &#246;rne&#287;inde klon, <code>kahve_alani_label</code> sat&#305;r&#305;ndan devam ederek kahve alan&#305; alt modeline girer.
+      </p>
+      <p class="module-instance-lead reveal module-instance-lead--tight">Label Spreadsheet (Arena)</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Label Name</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>kahve_alani_label</code></td>
+              <td>&#8212;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-process" class="module-instance-heading reveal">Process mod&#252;l&#252;</h3>
+      <p class="module-instance-lead reveal">
+        <strong>Process</strong>, &#231;o&#287;u KYK ad&#305;m&#305;n&#305;n kalbidir: entity bir veya daha fazla <strong>kaynak</strong>&#8217;u zaman dilimi boyunca tutar (<strong>Seize</strong>), i&#351;lem veya y&#252;r&#252;me s&#252;resi (<strong>Delay</strong>) uygular, sonra kayna&#287;&#305; b&#305;rakar (<strong>Release</strong>).
+        Spreadsheet&#8217;taki <strong>Logic</strong> / <strong>Action</strong> b&#246;l&#252;m&#252;nde bu sat&#305;rlar &#231;izilir; istenirse sadece gecikme (tek Delay) de kullan&#305;labilir.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>&#214;zellik</th>
+              <th>A&#231;&#305;klama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kaynak oturumu</td>
+              <td>Kasa, personel, masa, turnike vb. <strong>Resource</strong> ad&#305; ile e&#351;lenir; kapasite 1&#8217;den b&#252;y&#252;k ise &#231;oklu birim.</td>
+            </tr>
+            <tr>
+              <td>S&#252;re</td>
+              <td>Sabit s&#252;re, &#252;stel/normal/uniform Expression veya <code>a_Hiz</code> ile &#246;l&#231;eklenen da&#287;&#305;l&#305;m.</td>
+            </tr>
+            <tr>
+              <td>Kuyruk</td>
+              <td>Process &#246;n&#252;nde birikim; ortalama bekleme ve doluluk &#246;zet raporda g&#246;r&#252;n&#252;r.</td>
+            </tr>
+            <tr>
+              <td>Dispose ile ba&#287;</td>
+              <td>Zincirin sonunda <strong>Release</strong> tamamlanm&#305;&#351; olmal&#305;d&#305;r; ard&#305;&#351;&#305;k Record&#8217;dan sonra uygun <strong>Dispose</strong> ile &#231;&#305;k&#305;&#351; se&#231;ilir (<code>ekmek_dispose</code>, bina &#231;&#305;k&#305;&#351;&#305;, vb.).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="module-instance-lead reveal module-instance-lead--tight">Seize, Delay ve Release</p>
+      <p class="module-instance-lead reveal">
+        <strong>Seize</strong> &#231;o&#287;unlukla <strong>Process</strong> Logic&#8217;inde kullan&#305;l&#305;r; ayr&#305; bir Seize Spreadsheet yoktur.
+        <strong>Delay</strong> ise hem Process sat&#305;r&#305;nda tek ba&#351;&#305;na (<strong>Action</strong> yaln&#305;zca Delay) hem de &#231;izim paletindeki <strong>Delay</strong> kutusu ile saf zaman gecikmesi olarak konumlanabilir; kaynak kapamaz, tipik olarak Process &#246;n&#252;nde ekstra bir &#8220;kaynak kuyru&#287;u&#8221; olu&#351;turmaz.
+        <strong>Release</strong> hem Process zincirinin son ad&#305;m&#305; hem de <strong>ba&#287;&#305;ms&#305;z Release mod&#252;l&#252;</strong> olabilir &#8212; o zaman Spreadsheet + <strong>Resources</strong> alt penceresi kullan&#305;l&#305;r.
+        Projede hatlar <code>Seize Delay Release</code>; saf gecikme &#246;rnekleri <code>yurume_mesafesi</code>, <code>sabir</code>; masa i&#231;in <code>Masayi_Bosalt</code>.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Logic</th>
+              <th>K&#305;sa rol</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Seize</strong></td>
+              <td>Belirtilen <strong>Resource</strong>&#8217;u talep et; doluysa Process kuyru&#287;unda s&#305;ra bekle.</td>
+            </tr>
+            <tr>
+              <td><strong>Delay</strong></td>
+              <td>Process i&#231;inde: Seize sonras&#305; servis s&#252;resi veya <strong>yaln&#305;zca Delay</strong> sat&#305;r&#305; (y&#252;r&#252;me, bekleme hissi, &#252;&#231;gen Expression). Ayr&#305; Delay mod&#252;l&#252;: &#231;izimde ba&#287;&#305;ms&#305;z blok; Spreadsheet&#8217;ta Name + s&#252;re alanlar&#305;.</td>
+            </tr>
+            <tr>
+              <td><strong>Release</strong></td>
+              <td>Process i&#231;inde: ayn&#305; oturumda al&#305;nan kayna&#287;&#305; serbest b&#305;rak (Seize&#8594;Delay&#8594;Release). Ayr&#305; mod&#252;l: Spreadsheet + Resources diyalogu ile istenen kaynak ve birim.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="module-instance-lead reveal module-instance-lead--tight">Process i&#231;i saf Delay sat&#305;rlar&#305; (&#246;zet)</p>
+      <p class="aside-note module-process-meta">Bu sat&#305;rlarda Action s&#252;tunu yaln&#305;zca <strong>Delay</strong>; kaynak Seize/Release yok (<strong>Resources: 0 rows</strong>). Tam Spreadsheet a&#351;a&#287;&#305;daki Process tablosunda.</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Delay Type</th>
+              <th>Units</th>
+              <th>Expression / da&#287;&#305;l&#305;m</th>
+              <th>Rol (KYK)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>yurume_mesafesi</code></td>
+              <td>Expression</td>
+              <td>Seconds</td>
+              <td><code>15 / a_Hiz</code></td>
+              <td>Kamp&#252;s/hatlar aras&#305; y&#252;r&#252;me; h&#305;z &#246;zniteli&#287;i ile &#246;l&#231;eklenir.</td>
+            </tr>
+            <tr>
+              <td><code>sabir</code></td>
+              <td>Expression</td>
+              <td>Seconds</td>
+              <td><code>TRIA(5,10,20)</code></td>
+              <td>Beklemede ge&#231;en s&#252;re; Hold / sab&#305;rs&#305;zl&#305;k veya Search&#8211;Remove ile ili&#351;kilendirilebilir.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="module-instance-lead reveal module-instance-lead--tight">Release mod&#252;l&#252; Spreadsheet (Arena) &#8212; <code>Masayi_Bosalt</code></p>
+      <p class="aside-note module-process-meta"><strong>Resources</strong> alt penceresi: Type <strong>Resource</strong>; kaynak Arena Resource tan&#305;m&#305;yla ayn&#305; adda olmal&#305;d&#305;r.</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Resources</th>
+              <th>Type</th>
+              <th>Resource Name</th>
+              <th>Units to Release</th>
+              <th>Rol (KYK)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Masayi_Bosalt</code></td>
+              <td>1 rows</td>
+              <td>Resource</td>
+              <td><code>sandaye ve masa</code></td>
+              <td>1</td>
+              <td>&#214;&#287;renci yeme&#287;i bitirince oturma kayna&#287;&#305;n&#305; b&#305;rakar; kuyruk / kapasiteyi yeniler.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="module-instance-lead reveal module-instance-lead--tight">Process Spreadsheet (Arena) &#8212; proje sat&#305;rlar&#305;</p>
+      <p class="aside-note module-process-meta">Type: <strong>Standard</strong>; Priority: <strong>Medium(2)</strong>; Allocation: <strong>Value Added</strong>; Resources: Seize i&#231;eren sat&#305;rlarda <strong>1 rows</strong>, saf Delay&#8217;de <strong>0 rows</strong>. <strong>Report Statistics</strong> t&#252;m sat&#305;rlarda i&#351;aretli.</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact module-table--process-sheet">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Action</th>
+              <th>Delay Type</th>
+              <th>Units</th>
+              <th>Min</th>
+              <th>Value</th>
+              <th>Max</th>
+              <th>Expression</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>TC_Giris_Sureci</code></td>
+              <td>Seize Delay Release</td>
+              <td>Triangular</td>
+              <td>Minutes</td>
+              <td>0,5</td>
+              <td>1</td>
+              <td>1,5</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><code>Et_Hatti</code></td>
+              <td>Seize Delay Release</td>
+              <td>Triangular</td>
+              <td>Minutes</td>
+              <td>0,5</td>
+              <td>1</td>
+              <td>1,5</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><code>Sebze_Hatti</code></td>
+              <td>Seize Delay Release</td>
+              <td>Triangular</td>
+              <td>Minutes</td>
+              <td>0,5</td>
+              <td>1</td>
+              <td>1,5</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><code>Tost_Siparisi</code></td>
+              <td>Seize Delay Release</td>
+              <td>Triangular</td>
+              <td>Minutes</td>
+              <td>2</td>
+              <td>4</td>
+              <td>6</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><code>Tepsi_Dokme</code></td>
+              <td>Seize Delay Release</td>
+              <td>Triangular</td>
+              <td>Minutes</td>
+              <td>0,2</td>
+              <td>0,5</td>
+              <td>1,5</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><code>yurume_mesafesi</code></td>
+              <td>Delay</td>
+              <td>Expression</td>
+              <td>Seconds</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td><code>15 / a_Hiz</code></td>
+            </tr>
+            <tr>
+              <td><code>Kahve_Alani</code></td>
+              <td>Seize Delay Release</td>
+              <td>Triangular</td>
+              <td>Minutes</td>
+              <td>10</td>
+              <td>20</td>
+              <td>30</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><code>kahve_servis</code></td>
+              <td>Seize Delay Release</td>
+              <td>Expression</td>
+              <td>Minutes</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td><code>TRIA(30,60,120)</code></td>
+            </tr>
+            <tr>
+              <td><code>sabir</code></td>
+              <td>Delay</td>
+              <td>Expression</td>
+              <td>Seconds</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td><code>TRIA(5,10,20)</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-hold" class="module-instance-heading reveal">Hold mod&#252;l&#252;</h3>
+      <p class="module-instance-lead reveal">
+        <strong>Hold</strong> (turuncu sekizgen), entity&#8217;yi ko&#351;ul ger&#231;ekle&#351;ene veya <strong>Signal</strong> gelene kadar durdurur; kapasite doluyken giri&#351;i kesmek i&#231;in kullan&#305;l&#305;r (&#246;rn. yemekhane N<sub>in&nbsp;system</sub> tavan&#305;).
+        <strong>Process</strong> mod&#252;l&#252;ndeki <code>sabir</code> ise beklerken ge&#231;en <em>s&#252;re</em>yi &#252;retir (&#252;&#231;gen saniye); modelde genelde Hold/timeout veya Search&#8211;Remove ile birlikte &#8220;sab&#305;rs&#305;zl&#305;k terki&#8221; okumak i&#231;in kullan&#305;l&#305;r.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>&#214;zellik</th>
+              <th>A&#231;&#305;klama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Signal</td>
+              <td>Masa bo&#351;al&#305;&#351;&#305; gibi olaylar kapasiteyi a&#231;ar; bekleyen Hold gev&#351;er.</td>
+            </tr>
+            <tr>
+              <td>Timeout</td>
+              <td>Maksimum bekleme a&#351;&#305;l&#305;rsa &#231;&#305;k&#305;&#351; koluna y&#246;nlendirme m&#252;mk&#252;n (Decide / Remove).</td>
+            </tr>
+            <tr>
+              <td><code>sabir</code> ile ili&#351;ki</td>
+              <td>Ayr&#305; bir <strong>Delay</strong> s&#252;resi &#252;retir; Hold s&#252;resini veya terk karar&#305;n&#305; besleyen alt mant&#305;k &#351;emaya ba&#287;l&#305;d&#305;r.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="module-instance-lead reveal module-instance-lead--tight">Hold Spreadsheet (Arena)</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact module-table--hold-sheet">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Wait for Value</th>
+              <th>Limit</th>
+              <th>Condition</th>
+              <th>Queue Type</th>
+              <th>Queue Name</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Ekmek_Bekleme_Noktasi</code></td>
+              <td>Wait for Signal</td>
+              <td>101</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>Queue</td>
+              <td><code>Ekmek_Bekleme_Noktasi.Queue</code></td>
+              <td><code>Ekmek_Takviye_Zamani</code> Signal&#8217;&#305; (101) ile uyand&#305;r&#305;l&#305;r.</td>
+            </tr>
+            <tr>
+              <td><code>yemekhane_girisine_kapasite</code></td>
+              <td>Scan for Condition</td>
+              <td>1</td>
+              <td>&#8212;</td>
+              <td><code>NQ(yemekhane_girisine_kapasite.Queue) &lt; 100</code></td>
+              <td>Queue</td>
+              <td><code>yemekhane_girisine_kapasite.Queue</code></td>
+              <td>&#8212;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-signal" class="module-instance-heading reveal">Signal mod&#252;l&#252;</h3>
+      <p class="module-instance-lead reveal">
+        <strong>Signal</strong>, <strong>Hold</strong> mod&#252;l&#252;n&#252;n <em>Wait for Signal</em> dal&#305;nda bekleyen entity&#8217;leri uyand&#305;r&#305;r; <strong>PickStation</strong> veya <strong>Route</strong> yapmaz.
+        G&#246;nderilen say&#305;sal kod, Hold&#8217;daki <strong>Wait for Value</strong> ile birebir e&#351;le&#351;meli &#8212; projede ekmek takviye zaman&#305; sinyali <strong>101</strong> olarak tan&#305;ml&#305;d&#305;r.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>&#214;zellik</th>
+              <th>A&#231;&#305;klama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rol</td>
+              <td>Kapasite geri beslemesi: masa/ekmek/turnike gibi olay sonras&#305; kuyru&#287;u ilerletir.</td>
+            </tr>
+            <tr>
+              <td>PickStation ile fark</td>
+              <td><strong>PickStation</strong> istasyon se&#231;er ve <strong>Route</strong> s&#252;resi uygular; <strong>Signal</strong> yaln&#305;zca bekleyen Hold&#8217;a &#8220;devam&#8221; verir.</td>
+            </tr>
+            <tr>
+              <td>Spreadsheet</td>
+              <td>A&#351;a&#287;&#305;daki sat&#305;r Arena Signal Spreadsheet&#8217;&#305;n&#305;n projeye &#246;zg&#252; kayd&#305;d&#305;r.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="module-instance-lead reveal module-instance-lead--tight">Signal Spreadsheet (Arena)</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Signal Value</th>
+              <th>Limit</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Ekmek_Takviye_Zamani</code></td>
+              <td>101</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-station-route" class="module-instance-heading reveal">Station ve Route mod&#252;lleri</h3>
+      <p class="module-instance-lead reveal">
+        <strong>Station</strong>, &#231;izimde mant&#305;ksal bir &#8220;durak&#8221;d&#305;r: entity burada bir kuyruk veya kaynak hatt&#305;na ba&#287;lan&#305;r.
+        <strong>Route</strong>, bir istasyondan di&#287;erine gidi&#351; s&#252;resini modele ekler; <strong>PickStation</strong> &#8220;Route&#8221; transfer tipinde bu s&#252;reyi Spreadsheet&#8217;tan okur (&#246;rn. 15 saniye).
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>&#214;zellik</th>
+              <th>A&#231;&#305;klama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PickStation ba&#287;&#305;</td>
+              <td><code>HAT_SECIMI</code> adaylar&#305; <strong>Station 2</strong> / <strong>Station 3</strong>; &#231;izimde mod&#252;l adlar&#305; <code>Et_Hatti_St</code>, <code>Sebze_Hatti_St</code>. Servis kuyru&#287;u ile ili&#351;ki: <code>Et_Hatti.Queue</code>, <code>Sebze_Hatti.Queue</code> (Process kaynak adlar&#305;).</td>
+            </tr>
+            <tr>
+              <td>Signal ile ili&#351;ki</td>
+              <td>Ekmek takviye olay&#305;nda <code>Ekmek_Takviye_Zamani</code> <strong>Signal</strong>&#8217;&#305; (101) g&#246;ndererek <code>Ekmek_Bekleme_Noktasi</code> Hold&#8217;unu gev&#351;etebilirsiniz.</td>
+            </tr>
+            <tr>
+              <td>Spreadsheet</td>
+              <td>A&#351;a&#287;&#305;daki tablo Arena <strong>Station</strong> Spreadsheet kay&#305;t&#305;d&#305;r; <strong>Route</strong> i&#231;in ek sat&#305;rlar payla&#351;&#305;l&#305;rsa geni&#351;letilir.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="module-instance-lead reveal module-instance-lead--tight">Station Spreadsheet (Arena)</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Station Type</th>
+              <th>Station Name</th>
+              <th>Parent Activity Area</th>
+              <th>Associated Intersection</th>
+              <th>Report Statistics</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Et_Hatti_St</code></td>
+              <td>Station</td>
+              <td>Station 2</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>Evet</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><code>Sebze_Hatti_St</code></td>
+              <td>Station</td>
+              <td>Station 3</td>
+              <td>&#8212;</td>
+              <td>&#8212;</td>
+              <td>Evet</td>
+              <td>&#8212;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-pickstation" class="module-instance-heading reveal">PickStation mod&#252;l&#252;</h3>
+      <p class="module-instance-lead reveal">
+        <strong>PickStation</strong>, bir <strong>Station</strong> k&#252;mesinden tek bir istasyonu kurala g&#246;re se&#231;er; &#231;o&#287;unlukla kuyruk uzunlu&#287;u (<strong>NQ</strong>), yoldaki talep veya &#246;nceden tan&#305;ml&#305; &#246;l&#231;&#252;t ile y&#252;k dengeleme yap&#305;l&#305;r.
+        Projede <strong>HAT_SECIMI</strong> sat&#305;r&#305;: <strong>Minimum</strong> testinde hem kuyruktaki hem yoldaki (<strong>Number en Route</strong>) entity say&#305;s&#305; dikkate al&#305;n&#305;r; ard&#305;&#351;&#305;k <strong>Route</strong> ile se&#231;ilen istasyona 15 saniye hareket uygulan&#305;r.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>&#214;zellik</th>
+              <th>A&#231;&#305;klama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kural &#246;rnekleri</td>
+              <td>Minimum NQ, FIFO &#246;nceli&#287;i, istasyon kapasitesi.</td>
+            </tr>
+            <tr>
+              <td>Hold / Decide / Signal ile fark</td>
+              <td><strong>Hold</strong> bekletir; <strong>Signal</strong> Hold&#8217;u gev&#351;etir. <strong>Decide</strong> dallar&#305;r. <strong>PickStation</strong> istasyon k&#252;mesinden se&#231;im + Route yapar.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="module-instance-lead reveal module-instance-lead--tight">PickStation Spreadsheet &#8212; <code>HAT_SECIMI</code></p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact module-table--pickstation-sheet">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Test Condition</th>
+              <th>NQ</th>
+              <th>En Route</th>
+              <th>Res. busy</th>
+              <th>Expr.</th>
+              <th>Stations</th>
+              <th>Transfer</th>
+              <th>Route Time</th>
+              <th>Units</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>HAT_SECIMI</code></td>
+              <td>Minimum</td>
+              <td>Evet</td>
+              <td>Evet</td>
+              <td>Hay&#305;r</td>
+              <td>Hay&#305;r</td>
+              <td>2 rows</td>
+              <td>Route</td>
+              <td>15</td>
+              <td>Seconds</td>
+              <td>&#8212;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="module-instance-lead reveal module-instance-lead--tight">Stations (alt pencere)</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Station Name</th>
+              <th>Queue Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Station 2</td>
+              <td><code>Et_Hatti.Queue</code></td>
+            </tr>
+            <tr>
+              <td>Station 3</td>
+              <td><code>Sebze_Hatti.Queue</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="modul-dispose" class="module-instance-heading reveal">Dispose mod&#252;l&#252;</h3>
+      <p class="module-instance-lead reveal">
+        <strong>Dispose</strong>, entity&#8217;nin sistemden &#231;&#305;k&#305;&#351;&#305;d&#305;r (ba&#351;ar&#305;l&#305; tamamlanma veya terk). Sonras&#305;nda o entity i&#231;in kaynak veya kuyruk kalmaz; &#231;&#305;k&#305;&#351; istatistikleri g&#252;ncellenir.
+      </p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>&#214;zellik</th>
+              <th>A&#231;&#305;klama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Rol</td>
+              <td>Ak&#305;&#351; &#231;izelgesinde sonland&#305;r&#305;c&#305;; WIP azal&#305;r, tamamlanan varl&#305;k say&#305;s&#305; &#246;zetlere yans&#305;r.</td>
+            </tr>
+            <tr>
+              <td>Yerle&#351;im</td>
+              <td>Genelde son <strong>Process</strong> / <strong>Release</strong> ve iste&#287;e ba&#287;l&#305; <strong>Record</strong> sonras&#305;; farkl&#305; senaryolar i&#231;in birden fazla Dispose kullan&#305;labilir.</td>
+            </tr>
+            <tr>
+              <td>Terk senaryosu</td>
+              <td><strong>Hold</strong> timeout, <strong>Search</strong> / <strong>Remove</strong> ile kuyruktan &#231;&#305;karma sonras&#305; yine <strong>Dispose</strong> ile kapat&#305;l&#305;r.</td>
+            </tr>
+            <tr>
+              <td>Record Entity Statistics</td>
+              <td>&#304;&#351;aretliyse &#231;&#305;k&#305;&#351; entity&#8217;leri i&#231;in ilave istatistik &#252;retilir; a&#351;a&#287;&#305;daki Spreadsheet sat&#305;rlar&#305;nda hepsi etkindir.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="module-instance-lead reveal module-instance-lead--tight">Dispose Spreadsheet (Arena)</p>
+      <div class="module-table-wrap reveal">
+        <table class="module-table module-table--compact">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Record Entity Statistics</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ekmek_dispose</code></td>
+              <td>Evet</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><code>Binadan &#199;ikis</code></td>
+              <td>Evet</td>
+              <td>&#8212;</td>
+            </tr>
+            <tr>
+              <td><code>sonra_gelmek_icin_cikar</code></td>
+              <td>Evet</td>
+              <td>&#8212;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="aside-note module-dispose-footnote">Blok adlar&#305;n&#305; Arena&#8217;daki yaz&#305;mla birebir ayn&#305; tutun (<code>Binadan &#199;ikis</code> gibi).</p>
+    </section>
+
+    <section id="palet" class="section section-palette">
+      <div class="section-head reveal">
+        <h2>Arena paleti: &#252;&#231; renkli &#231;ekirdek + gri &#231;&#305;kt&#305;</h2>
+        <p class="section-sub">
+          Arena&#8217;da mod&#252;lleri &#246;nce <strong>kategoriye</strong> g&#246;re okursunuz; ekran g&#246;r&#252;nt&#252;lerinizdeki &#252;st &#351;eritler bunu &#246;zetler.
+          <strong>Bordo</strong> veri tan&#305;mlar&#305;, <strong>a&#231;&#305;k ye&#351;il</strong> ayr&#305;k olay i&#351;lemeyi, <strong>turuncu</strong> karar ve kontrol ak&#305;&#351;&#305;n&#305;, <strong>gri</strong> panel ise &#231;&#305;kt&#305; ve istatistikleri ta&#351;&#305;r.
+        </p>
+        <div class="arena-legend reveal" aria-label="Arena &#252;st &#351;erit renkleri">
+          <span class="arena-legend-item"><span class="arena-legend-swatch arena-legend-swatch--data" aria-hidden="true"></span> Data Definition</span>
+          <span class="arena-legend-item"><span class="arena-legend-swatch arena-legend-swatch--disc" aria-hidden="true"></span> Discrete Processing</span>
+          <span class="arena-legend-item"><span class="arena-legend-swatch arena-legend-swatch--dec" aria-hidden="true"></span> Decisions</span>
+          <span class="arena-legend-item"><span class="arena-legend-swatch arena-legend-swatch--io" aria-hidden="true"></span> Input / Output</span>
+        </div>
+      </div>
+
+      <div class="palette-stack reveal" aria-label="Arena panel katmanlar&#305;">
+        <div class="palette-bar palette-bar--data">Data Definition</div>
+        <div class="palette-bar palette-bar--disc">Discrete Processing</div>
+        <div class="palette-bar palette-bar--dec">Decisions</div>
+        <div class="palette-bar palette-bar--io">Input Analyzer / Output Analyzer</div>
+      </div>
+
+      <div class="palette-panels">
+        <article class="palette-panel reveal palette-panel--data">
+          <h3>Data Definition</h3>
+          <p class="palette-panel-lead">Kaynak, kuyruk, entity tipi, ifade ve zaman &#231;izelgesi gibi <strong>modele ait tan&#305;mlar</strong>; &#231;izimden &#246;nce veya paralelde doldurulur.</p>
+          <ul class="mod-chip-list" aria-label="Data Definition mod&#252;lleri">
+            <li><span class="mod-chip">Activity Area</span> ABC alanlar&#305;</li>
+            <li><span class="mod-chip">Attribute</span> Entity &#246;znitelikleri</li>
+            <li><span class="mod-chip">Entity</span> Entity tipleri</li>
+            <li><span class="mod-chip">Expression</span> Sabit ve form&#252;l</li>
+            <li><span class="mod-chip">Failure</span> Ar&#305;za / kesinti &#246;r&#252;nt&#252;s&#252;</li>
+            <li><span class="mod-chip">Queue</span> Kuyruk tan&#305;m&#305;</li>
+            <li><span class="mod-chip">Resource</span> Personel, makine vb.</li>
+            <li><span class="mod-chip">Schedule</span> Kapasite zaman &#231;izelgesi</li>
+            <li><span class="mod-chip">Sequence</span> &#304;stasyon s&#305;ras&#305;</li>
+            <li><span class="mod-chip">Set</span> Kaynak / kuyruk k&#252;meleri</li>
+            <li><span class="mod-chip">StateSet</span> Kaynak durumlar&#305;</li>
+            <li><span class="mod-chip">Station Data</span> &#304;stasyon verisi</li>
+            <li><span class="mod-chip">Variable</span> Global de&#287;i&#351;kenler</li>
+          </ul>
+        </article>
+
+        <article class="palette-panel reveal palette-panel--disc">
+          <h3>Discrete Processing</h3>
+          <p class="palette-panel-lead">Entity&#8217;nin sahada gezdi&#287;i ad&#305;mlar: olu&#351;turma, gecikme, kaynak ele ge&#231;irme / serbest b&#305;rakma, y&#246;nlendirme ve sistemden &#231;&#305;k&#305;&#351;.</p>
+          <ul class="mod-chip-list">
+            <li><span class="mod-chip">Create</span> Var&#305;&#351; &#252;retimi</li>
+            <li><span class="mod-chip">Dispose</span> Sistemden &#231;&#305;k&#305;&#351;</li>
+            <li><span class="mod-chip">Process</span> S&#252;re + kaynak oturumu</li>
+            <li><span class="mod-chip">Seize</span> Kaynak talebi</li>
+            <li><span class="mod-chip">Release</span> Kaynak b&#305;rakma</li>
+            <li><span class="mod-chip">Delay</span> Saf zaman gecikmesi</li>
+            <li><span class="mod-chip">Assign</span> Alan / de&#287;i&#351;ken atamas&#305;</li>
+            <li><span class="mod-chip">Assign Attribute</span> &#214;znitelik atamas&#305;</li>
+            <li><span class="mod-chip">Route</span> &#304;stasyonlar aras&#305; y&#246;nlendirme</li>
+            <li><span class="mod-chip">Station</span> Mant&#305;ksal durak</li>
+            <li><span class="mod-chip">PickStation</span> Se&#231;imli istasyon</li>
+            <li><span class="mod-chip">Clone</span> Entity &#231;o&#287;altma</li>
+            <li><span class="mod-chip">Gather</span> Gruplama</li>
+            <li><span class="mod-chip">Disperse</span> Da&#287;&#305;tma</li>
+            <li><span class="mod-chip">Label</span> Atlama hedefi</li>
+            <li><span class="mod-chip">Go to Label</span> Atlama</li>
+          </ul>
+        </article>
+
+        <article class="palette-panel reveal palette-panel--dec">
+          <h3>Decisions</h3>
+          <p class="palette-panel-lead">Dallanma, bekleme noktas&#305;, arama ve sinyal gibi <strong>mant&#305;k kontrol&#252;</strong>; ye&#351;il ak&#305;&#351;&#305; y&#246;nlendirir veya durdurur.</p>
+          <ul class="mod-chip-list">
+            <li><span class="mod-chip">Decide</span> Ko&#351;ul / olas&#305;l&#305;k &#351;ubes&#305;</li>
+            <li><span class="mod-chip">Hold</span> Bekletme (sekizgen)</li>
+            <li><span class="mod-chip">Signal</span> Olay tetikleme</li>
+            <li><span class="mod-chip">Search</span> Kuyrukta arama</li>
+            <li><span class="mod-chip">Remove</span> &#199;&#305;karma</li>
+            <li><span class="mod-chip">Search and Remove</span> Bul ve &#231;&#305;kar</li>
+          </ul>
+        </article>
+
+        <article class="palette-panel reveal palette-panel--io">
+          <h3>Input Analyzer / Output Analyzer</h3>
+          <p class="palette-panel-lead">Dosya ve istatistik katman&#305;: tally, saya&#231;, zaman ortalamalar&#305;, WIP ve harici veri okuma/yazma.</p>
+          <ul class="mod-chip-list">
+            <li><span class="mod-chip">Record</span> &#214;l&#231;&#252;m yaz&#305;m&#305;</li>
+            <li><span class="mod-chip">Tally</span> &#304;statistik tan&#305;m&#305;</li>
+            <li><span class="mod-chip">Counter</span> Saya&#231;</li>
+            <li><span class="mod-chip">Frequency</span> Frekans da&#287;&#305;l&#305;m&#305;</li>
+            <li><span class="mod-chip">Output</span> &#199;&#305;kt&#305; de&#287;i&#351;keni</li>
+            <li><span class="mod-chip">Time Persistent</span> Zaman i&#231;i ortalama</li>
+            <li><span class="mod-chip">WIP</span> &#304;&#351;lemdeki varl&#305;k</li>
+            <li><span class="mod-chip">Timestamp</span> Zaman damgas&#305;</li>
+            <li><span class="mod-chip">File</span> Dosya yap&#305;s&#305;</li>
+            <li><span class="mod-chip">ReadWrite</span> Dosyadan oku / yaz</li>
+            <li><span class="mod-chip">Change State</span> Kaynak durumu de&#287;i&#351;tir</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="data/arena-metrics.js"></script>
+  <script src="data/stat-fit-tests.js"></script>
+  <script src="data/bottleneck-report.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="stat-tests.js"></script>
+  <script src="stat-advisor.js"></script>
+  <script src="report-runner.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

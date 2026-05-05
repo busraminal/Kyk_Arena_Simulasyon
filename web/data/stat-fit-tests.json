@@ -1,0 +1,336 @@
+{
+  "meta": {
+    "generatedUtc": "2026-05-03T19:00:18.791125+00:00",
+    "excelPath": "C:\\Users\\busra\\Desktop\\kyk_simülasyon\\web\\data\\tam_arena_verisi.xlsx",
+    "n_rows": 200,
+    "tests_note_tr": "Arena Modülleriyle Yemekhane Simülasyonu sunumu ile uyum (n≈200): Ki-kare — kategorik uygunluk veya çapraz tablo bağımsızlığı; Kolmogorov–Smirnov — sürekli değişkenin seçilen dağılıma uyumu (D ve p). H0 reddedilmezse gözlenen ile beklenen arasında α=0,05 düzeyinde anlamlı fark yoktur (ör. geliş süreleri üstel dağılıma uygun). Parametreler veriden tahmin edildiğinde KS p değeri klasik tablolara göre iyimser olabilir."
+  },
+  "chi_square": [
+    {
+      "title": "Ki-kare uygunluk (eşit dağılım): Yemek_Tercihi",
+      "variable": "Yemek_Tercihi",
+      "hypothesis": "H0: Tüm kategoriler eşit olasılıklı.",
+      "categories": [
+        "1",
+        "2"
+      ],
+      "observed": [
+        140.0,
+        60.0
+      ],
+      "expected_each": 100.0,
+      "chi2_statistic": 32.0,
+      "df": 1,
+      "p_value": 1.5417257900280013e-08,
+      "reject_H0_alpha005": true
+    },
+    {
+      "title": "Ki-kare bağımsızlık: Butce × Yemek_Tercihi",
+      "variables": [
+        "Butce",
+        "Yemek_Tercihi"
+      ],
+      "table_rows_cols": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "row_labels": [
+        "1",
+        "2"
+      ],
+      "col_labels": [
+        "1",
+        "2"
+      ],
+      "observed_matrix": [
+        [
+          26.0,
+          12.0
+        ],
+        [
+          114.0,
+          48.0
+        ]
+      ],
+      "expected_matrix": [
+        [
+          26.6,
+          11.4
+        ],
+        [
+          113.4,
+          48.6
+        ]
+      ],
+      "chi2_statistic": 0.0015470775704693835,
+      "df": 1,
+      "p_value": 0.968624970942055,
+      "reject_H0_alpha005": false,
+      "note": "H0: İki değişken birbirinden bağımsız."
+    },
+    {
+      "title": "Ki-kare bağımsızlık: Sosyal_Mod × Yemek_Tercihi",
+      "variables": [
+        "Sosyal_Mod",
+        "Yemek_Tercihi"
+      ],
+      "table_rows_cols": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "row_labels": [
+        "1",
+        "2"
+      ],
+      "col_labels": [
+        "1",
+        "2"
+      ],
+      "observed_matrix": [
+        [
+          46.0,
+          20.0
+        ],
+        [
+          94.0,
+          40.0
+        ]
+      ],
+      "expected_matrix": [
+        [
+          46.2,
+          19.8
+        ],
+        [
+          93.8,
+          40.2
+        ]
+      ],
+      "chi2_statistic": 0.0,
+      "df": 1,
+      "p_value": 1.0,
+      "reject_H0_alpha005": false,
+      "note": "H0: İki değişken birbirinden bağımsız."
+    }
+  ],
+  "kolmogorov_smirnov": [
+    {
+      "title": "Kolmogorov-Smirnov: Gelis_Suresi_Dk ~ Exp(scale=1.418)",
+      "variable": "Gelis_Suresi_Dk",
+      "reference_distribution": "exponential",
+      "estimated_scale_mean_minutes": 1.41845,
+      "D_statistic": 0.05048813399802604,
+      "p_value": 0.6686277440731985,
+      "reject_H0_alpha005": false,
+      "note": "Parametre veriden tahmin edildiği için klasik KS tabloları teorik olarak sıkı değildir; raporda bu sınırlılığı belirtin.",
+      "viz": {
+        "bin_edges": [
+          0.01,
+          0.7311111111111112,
+          1.4522222222222223,
+          2.1733333333333333,
+          2.8944444444444444,
+          3.6155555555555554,
+          4.336666666666667,
+          5.057777777777778,
+          5.778888888888889,
+          6.5
+        ],
+        "bin_centers": [
+          0.3705555555555556,
+          1.0916666666666668,
+          1.8127777777777778,
+          2.533888888888889,
+          3.255,
+          3.976111111111111,
+          4.697222222222223,
+          5.418333333333333,
+          6.139444444444445
+        ],
+        "bin_labels": [
+          "0.01–0.731",
+          "0.731–1.45",
+          "1.45–2.17",
+          "2.17–2.89",
+          "2.89–3.62",
+          "3.62–4.34",
+          "4.34–5.06",
+          "5.06–5.78",
+          "5.78–6.5"
+        ],
+        "observed_counts": [
+          89,
+          37,
+          26,
+          17,
+          16,
+          6,
+          3,
+          4,
+          2
+        ],
+        "expected_counts": [
+          79.14617562105816,
+          47.604001339663135,
+          28.632349267217204,
+          17.221481419396035,
+          10.358193786710125,
+          6.230136415686083,
+          3.747236299812995,
+          2.2538479015133728,
+          1.3556205044794822
+        ]
+      }
+    },
+    {
+      "title": "Kolmogorov-Smirnov: TC_Giris_Dk ~ Normal(μ=0.9899, σ=0.2098)",
+      "variable": "TC_Giris_Dk",
+      "reference_distribution": "normal",
+      "estimated_mu": 0.98995,
+      "estimated_sigma": 0.209843983711709,
+      "D_statistic": 0.05099755514203608,
+      "p_value": 0.6564683560450888,
+      "reject_H0_alpha005": false,
+      "note": "Normal parametreleri MO ile veriden tahmin edildi.",
+      "viz": {
+        "bin_edges": [
+          0.55,
+          0.6511111111111112,
+          0.7522222222222222,
+          0.8533333333333333,
+          0.9544444444444444,
+          1.0555555555555556,
+          1.1566666666666667,
+          1.2577777777777777,
+          1.3588888888888888,
+          1.46
+        ],
+        "bin_centers": [
+          0.6005555555555556,
+          0.7016666666666667,
+          0.8027777777777778,
+          0.9038888888888889,
+          1.005,
+          1.1061111111111113,
+          1.2072222222222222,
+          1.3083333333333331,
+          1.4094444444444445
+        ],
+        "bin_labels": [
+          "0.55–0.651",
+          "0.651–0.752",
+          "0.752–0.853",
+          "0.853–0.954",
+          "0.954–1.06",
+          "1.06–1.16",
+          "1.16–1.26",
+          "1.26–1.36",
+          "1.36–1.46"
+        ],
+        "observed_counts": [
+          12,
+          18,
+          30,
+          21,
+          41,
+          35,
+          23,
+          9,
+          11
+        ],
+        "expected_counts": [
+          7.033899000683763,
+          15.089345381127828,
+          25.77559606117785,
+          35.06183441185946,
+          37.98060666868146,
+          32.76378782689528,
+          22.50736303504455,
+          12.31222995886736,
+          5.362953623031141
+        ]
+      }
+    },
+    {
+      "title": "Kolmogorov-Smirnov: Yemek_Yeme_Dk ~ Normal(μ=17.18, σ=3.073)",
+      "variable": "Yemek_Yeme_Dk",
+      "reference_distribution": "normal",
+      "estimated_mu": 17.182949999999998,
+      "estimated_sigma": 3.073212781032254,
+      "D_statistic": 0.0840840254355647,
+      "p_value": 0.11163495827262693,
+      "reject_H0_alpha005": false,
+      "note": "Normal parametreleri MO ile veriden tahmin edildi.",
+      "viz": {
+        "bin_edges": [
+          11.58,
+          13.656666666666666,
+          15.733333333333333,
+          17.81,
+          19.886666666666663,
+          21.96333333333333,
+          24.04,
+          26.116666666666664,
+          28.193333333333328,
+          30.27
+        ],
+        "bin_centers": [
+          12.618333333333332,
+          14.695,
+          16.771666666666665,
+          18.84833333333333,
+          20.924999999999997,
+          23.001666666666665,
+          25.078333333333333,
+          27.154999999999994,
+          29.231666666666662
+        ],
+        "bin_labels": [
+          "11.6–13.7",
+          "13.7–15.7",
+          "15.7–17.8",
+          "17.8–19.9",
+          "19.9–22",
+          "22–24",
+          "24–26.1",
+          "26.1–28.2",
+          "28.2–30.3"
+        ],
+        "observed_counts": [
+          17,
+          52,
+          63,
+          32,
+          22,
+          9,
+          3,
+          0,
+          2
+        ],
+        "expected_counts": [
+          18.292613790843248,
+          38.593934875015734,
+          52.453056708340995,
+          45.93397812138696,
+          25.915761072216313,
+          9.416118816213936,
+          2.20162198957341,
+          0.3309492614237186,
+          0.03194807834252522
+        ]
+      }
+    }
+  ]
+}

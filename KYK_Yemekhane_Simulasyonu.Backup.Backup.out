@@ -1,0 +1,108 @@
+
+                                      ARENA Simulation Results
+                                      busra - License: STUDENT
+
+                                  Summary for Replication 1 of 1
+
+Project: Unnamed Project                                             Run execution date : 5/ 3/2026
+Analyst: busra                                                       Model revision date: 5/ 3/2026
+
+Replication ended at time      : 6.0 Hours 
+Base Time Units: Hours
+
+                                           TALLY VARIABLES
+
+Identifier                                  Average   Half Width  Minimum    Maximum   Observations
+___________________________________________________________________________________________________
+
+sistem                                          --         --         --         --          0
+Toplam_Yemek_Atigi                              --         --         --         --          0
+giris_zamani                                1.4840     (Insuf)    .69230     2.2758          2    
+Entity 1.VATime                             .00000     (Insuf)    .00000     .00000         22    
+Entity 1.NVATime                            .00000     (Insuf)    .00000     .00000         22    
+Entity 1.WaitTime                           .00000     (Insuf)    .00000     .00000         22    
+Entity 1.TranTime                           .00000     (Insuf)    .00000     .00000         22    
+Entity 1.OtherTime                          .00000     (Insuf)    .00000     .00000         22    
+Entity 1.TotalTime                          .00000     (Insuf)    .00000     .00000         22    
+Et_Hatti.Queue.WaitingTime                      --         --         --         --          0
+kahve_servis.Queue.WaitingTime                  --         --         --         --          0
+yemekhane_girisine_kapasite.Queue.WaitingT  .00000     (Insuf)    .00000     .00000          2    
+Tepsi_Dokme.Queue.WaitingTime                   --         --         --         --          0
+Masa_Kapma.Queue.WaitingTime                    --         --         --         --          0
+Ekmek_Bekleme_Noktasi.Queue.WaitingTime     .78372     (Insuf)    .60654     .96089          2    
+Sebze_Hatti.Queue.WaitingTime                   --         --         --         --          0
+TC_Giris_Sureci.Queue.WaitingTime               --         --         --         --          0
+sabir.Queue.WaitingTime                         --         --         --         --          0
+Tost_Siparisi.Queue.WaitingTime                 --         --         --         --          0
+Kahve_Alani.Queue.WaitingTime                   --         --         --         --          0
+
+                                     DISCRETE-CHANGE VARIABLES
+
+Identifier                                  Average   Half Width  Minimum    Maximum   Final Value
+___________________________________________________________________________________________________
+
+Entity 1.WIP                                1.5053     (Insuf)    .00000     3.0000     2.0000    
+Kahve_Alani_Koltuk.NumberBusy               .00000     (Insuf)    .00000     .00000     .00000    
+Kahve_Alani_Koltuk.NumberScheduled          100.00     (Insuf)    100.00     100.00     100.00    
+Kahve_Alani_Koltuk.Utilization              .00000     (Insuf)    .00000     .00000     .00000    
+Cop_Kovasi_Alani.NumberBusy                 .00000     (Insuf)    .00000     .00000     .00000    
+Cop_Kovasi_Alani.NumberScheduled            10.000     (Insuf)    10.000     10.000     10.000    
+Cop_Kovasi_Alani.Utilization                .00000     (Insuf)    .00000     .00000     .00000    
+sandaye ve masa.NumberBusy                  .00000     (Insuf)    .00000     .00000     .00000    
+sandaye ve masa.NumberScheduled             2000.0     (Insuf)    2000.0     2000.0     2000.0    
+sandaye ve masa.Utilization                 .00000     (Insuf)    .00000     .00000     .00000    
+Kahve_Makinesi.NumberBusy                   .00000     (Insuf)    .00000     .00000     .00000    
+Kahve_Makinesi.NumberScheduled              1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Kahve_Makinesi.Utilization                  .00000     (Insuf)    .00000     .00000     .00000    
+Et_Servis_Personeli.NumberBusy              .00000     (Insuf)    .00000     .00000     .00000    
+Et_Servis_Personeli.NumberScheduled         1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Et_Servis_Personeli.Utilization             .00000     (Insuf)    .00000     .00000     .00000    
+Parmak Ýzi Cihazý.NumberBusy                .00000     (Insuf)    .00000     .00000     .00000    
+Parmak Ýzi Cihazý.NumberScheduled           1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Parmak Ýzi Cihazý.Utilization               .00000     (Insuf)    .00000     .00000     .00000    
+Sebze_Servis_Personeli.NumberBusy           .00000     (Insuf)    .00000     .00000     .00000    
+Sebze_Servis_Personeli.NumberScheduled      1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Sebze_Servis_Personeli.Utilization          .00000     (Insuf)    .00000     .00000     .00000    
+Kantin_Gorevlisi.NumberBusy                 .00000     (Insuf)    .00000     .00000     .00000    
+Kantin_Gorevlisi.NumberScheduled            1.0000     (Insuf)    1.0000     1.0000     1.0000    
+Kantin_Gorevlisi.Utilization                .00000     (Insuf)    .00000     .00000     .00000    
+Et_Hatti.Queue.NumberInQueue                .00000     (Insuf)    .00000     .00000     .00000    
+kahve_servis.Queue.NumberInQueue            .00000     (Insuf)    .00000     .00000     .00000    
+yemekhane_girisine_kapasite.Queue.NumberIn  .00000     (Insuf)    .00000     .00000     .00000    
+Tepsi_Dokme.Queue.NumberInQueue             .00000     (Insuf)    .00000     .00000     .00000    
+Masa_Kapma.Queue.NumberInQueue              .00000     (Insuf)    .00000     .00000     .00000    
+Ekmek_Bekleme_Noktasi.Queue.NumberInQueue   .26124     (Insuf)    .00000     1.0000     .00000    
+Sebze_Hatti.Queue.NumberInQueue             1.2440     (Insuf)    .00000     2.0000     2.0000    
+TC_Giris_Sureci.Queue.NumberInQueue         .00000     (Insuf)    .00000     .00000     .00000    
+sabir.Queue.NumberInQueue                   .00000     (Insuf)    .00000     .00000     .00000    
+Tost_Siparisi.Queue.NumberInQueue           .00000     (Insuf)    .00000     .00000     .00000    
+Kahve_Alani.Queue.NumberInQueue             .00000     (Insuf)    .00000     .00000     .00000    
+
+                                             OUTPUTS
+
+Identifier                                   Value
+_____________________________________________________________
+
+Entity 1.NumberIn                           24.000    
+Entity 1.NumberOut                          22.000    
+Kahve_Alani_Koltuk.NumberSeized             .00000    
+Kahve_Alani_Koltuk.ScheduledUtilization     .00000    
+Cop_Kovasi_Alani.NumberSeized               .00000    
+Cop_Kovasi_Alani.ScheduledUtilization       .00000    
+sandaye ve masa.NumberSeized                .00000    
+sandaye ve masa.ScheduledUtilization        .00000    
+Kahve_Makinesi.NumberSeized                 .00000    
+Kahve_Makinesi.ScheduledUtilization         .00000    
+Et_Servis_Personeli.NumberSeized            .00000    
+Et_Servis_Personeli.ScheduledUtilization    .00000    
+Parmak Ýzi Cihazý.NumberSeized              .00000    
+Parmak Ýzi Cihazý.ScheduledUtilization      .00000    
+Sebze_Servis_Personeli.NumberSeized         .00000    
+Sebze_Servis_Personeli.ScheduledUtilizatio  .00000    
+Kantin_Gorevlisi.NumberSeized               .00000    
+Kantin_Gorevlisi.ScheduledUtilization       .00000    
+System.NumberOut                            22.000    
+
+
+Simulation run time: 0.03 minutes.
+Simulation run complete.

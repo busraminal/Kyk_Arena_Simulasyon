@@ -1,0 +1,43 @@
+[RESOURCES]
+Kahve_Alani_Koltuk
+Cop_Kovasi_Alani
+sandaye ve masa
+Kahve_Makinesi
+Et_Servis_Personeli
+Parmak Ýzi Cihazý
+Sebze_Servis_Personeli
+Kantin_Gorevlisi
+[VARIABLES]
+TC_Giris_Sureci.NumberOut
+kahve_servis.NumberOut
+Binadan Çikis.NumberOut
+Parmak_Izi_Kontrol.NumberOut False
+Parmak_Izi_Kontrol.NumberOut True
+yürüme_mesafesi.NumberIn
+Kahve_Icer_mi.NumberOut True
+Tepsi_Dokme.NumberOut
+Tepsi_Dokme.NumberIn
+Ekmek_Sonrasi_Yonlendirme.NumberOut True
+Kahve_Icer_mi.NumberOut False
+yürüme_mesafesi.NumberOut
+Create 2.NumberOut
+Kahve_Alani.NumberOut
+TC_Giris_Sureci.NumberIn
+Kahve_Alani.NumberIn
+Dispose 1.NumberOut
+kahve_servis.NumberIn
+Kantin_mi_Yemekhane_mi.NumberOut True
+Kantin_mi_Yemekhane_mi.NumberOut False
+Tost_Siparisi.NumberOut
+Tost_Siparisi.NumberIn
+Et_Hatti.NumberOut
+Yemek_Hatti_Secimi.NumberOut False
+Et_Hatti.NumberIn
+Oturma_Alani_Secimi.NumberOut False
+sonra_gelmek_icin_cikar.NumberOut
+Yemek_Hatti_Secimi.NumberOut True
+ogrenci_Girisi.NumberOut
+Sebze_Hatti.NumberOut
+Ekmek_Sonrasi_Yonlendirme.NumberOut False
+Oturma_Alani_Secimi.NumberOut True
+Sebze_Hatti.NumberIn
